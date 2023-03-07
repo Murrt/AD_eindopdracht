@@ -1,5 +1,7 @@
 public class Linked_List {
 
+	private ListNode head;
+    private ListNode tail;
 	public static void main(String[] args) {
 	}
 
@@ -8,6 +10,7 @@ public class Linked_List {
 		// in linked list kan alleen een node zonder next verwijderd worden omdat je
 		// anders een deel van de link verwijderd. pop()
 		while (node.next != null) {
+			System.out.println(node.next);
 			prev_node = node;
 			node = node.next;
 		}
@@ -20,11 +23,11 @@ public class Linked_List {
 	}
 
 	public void print_nodes(ListNode node) {
+		System.out.println("print");
 		while (node.next != null) {
 			System.out.println(node.toString());
 			node = node.next;
 		}
 		System.out.println(node.toString());
-
 	}
 }

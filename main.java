@@ -1,45 +1,33 @@
 import java.util.ArrayList;
 
 public class main {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
+
 		Doubly_Linked_List d_linkedlist = new Doubly_Linked_List();
+		d_linkedlist.add(5);
+		d_linkedlist.add(2);
+		d_linkedlist.add(3);
+		d_linkedlist.add(4);
 
-		Doubly_ListNode node1 = new Doubly_ListNode(1);
-		Doubly_ListNode node2 = new Doubly_ListNode(2);
-		Doubly_ListNode node3 = new Doubly_ListNode(3);
+		d_linkedlist.simpleSearch(2);
 
-		node1.next = node2;
-		node2.prev = node1;
-		node2.next = node3;
-		node3.prev = node2;
+		// d_linkedlist.print_nodes();
 
-		// ArrayList<Doubly_ListNode> result = d_linkedlist.remove(node2);
-		d_linkedlist.print_nodes(node2);
+		// d_linkedlist.simpleSort();
+		// System.out.println("---------------------");
+
+		// d_linkedlist.print_nodes();
+
+		// Doubly_Linked_List sorted = d_linkedlist.insertionSort();
+
+		// sorted.print_nodes();
+
+		// d_linkedlist.fastSearch(3);
 
 	}
 
+	public static void linkedlist (String[] args) throws Exception {
 		
-
-	// public static void main(String[] args) {
-	// 	Linked_List linkedlist = new Linked_List();
-
-	// 	ListNode node1 = new ListNode(1);
-	// 	ListNode node2 = new ListNode(2);
-	// 	ListNode node3 = new ListNode(3);
-
-	// 	node1.next = node2;
-	// 	node2.next = node3;
-	// 	node3.next = null;
-
-	// 	ListNode node0 = linkedlist.add(0, node1);
-
-	// 	linkedlist.print_nodes(node0);
-
-
-	// 	linkedlist.print_nodes(node0);
-
-	// 	linkedlist.remove(node1);	
-
-
-	// }
+	}
+	
 }

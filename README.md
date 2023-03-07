@@ -23,7 +23,7 @@ Vervolgens moeten deze datastructuren gebruikt kunnen worden om een
 tweetal zoekalgoritmen en een tweetal sorteeralgoritmen te demonstreren.
 Alle algoritmen moeten door de studenten zelf ontwikkeld worden (dit mogen
 bestaande algoritmen zijn). Studenten hebben ook de keuze om een �zelf
-ontworpen� algoritme te ontwikkelen en te implementeren. Bij het uitvoeren
+ontworpen algoritme te ontwikkelen en te implementeren. Bij het uitvoeren
 van de algoritmen moet het mogelijk zijn om de gehele dataset te gebruiken of
 slechts een deel hiervan.
 
