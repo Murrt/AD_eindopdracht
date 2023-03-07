@@ -1,9 +1,9 @@
-import java.util.ArrayList;
+package src.LL;
 
-public class Doubly_Linked_List {
+public class Linked_List {
 
-    public Doubly_ListNode head;
-    public Doubly_ListNode tail;
+    public ListNode head;
+    public ListNode tail;
     public int nodeCount = 0;
 
     public static void main(String[] args) {
@@ -11,36 +11,28 @@ public class Doubly_Linked_List {
     }
 
     public void remove(Integer index) throws Exception {
-        if (index < 0 || index > nodeCount) {
-            throw new Exception("Ongeldige index aangeleverd");
-        }
-
-        if (index == nodeCount) {
-            tail = tail.prev;
-        } else if (index == 1) {
-            head = head.next;
+        if (index < 1 || index > nodeCount) {
+            throw new Exception("ongeldige index");
         } else {
-            // zoek naar juiste node
-            Doubly_ListNode node = head;
-            for (int i = 1; i < index; i++) {
-                if (node.next != null) {
-                    node = node.next;
-                }
-            }
 
-            // koppel node die ervoor zit aan die erachter en andersom.
-            Doubly_ListNode prev_node = node.prev;
-            Doubly_ListNode next_node = node.next;
-            prev_node.next = next_node;
-            next_node.next = prev_node;
+            ListNode current = head;
+            ListNode last_ref;
+            ListNode next_ref;
+
+            for (Integer i = 0; i < nodeCount; i++) {
+                System.out.print(current.data);
+                current = current.next;
+            }
+            // [0,1][1,2][2,3][3,4]
         }
+
         nodeCount--;
     }
 
     public void print_nodes() {
-        Doubly_ListNode node = head;
+        ListNode node = head;
         // loop door alle nodes
-        for (int i = 1; i < nodeCount; i++) {
+        for (int i = 1; i <= nodeCount; i++) {
             System.out.println(node.data);
             node = node.next;
         }
@@ -48,7 +40,7 @@ public class Doubly_Linked_List {
 
     public void add(Integer data) {
 
-        Doubly_ListNode node = new Doubly_ListNode();
+        ListNode node = new ListNode();
         node.data = data;
 
         if (tail == null) {
@@ -57,11 +49,10 @@ public class Doubly_Linked_List {
 
         // Make next of new node as head and previous as null /
         node.next = head;
-        node.prev = null;
 
         // change prev of head node to new node /
         if (head != null) {
-            head.prev = node;
+            node.next = head;
         }
 
         // move the head to point to the new node /
@@ -70,32 +61,32 @@ public class Doubly_Linked_List {
         nodeCount++;
     }
 
-    Doubly_Linked_List insertionSort() {
+    public Linked_List insertionSort() {
 
-        Doubly_Linked_List sorted = new Doubly_Linked_List();
-        Doubly_ListNode current = head;
+        Linked_List sorted = new Linked_List();
+        ListNode current = head;
 
         while (current != null) {
-            Doubly_ListNode next = current.next;
+            ListNode next = current.next;
             // current.prev = current.next = null;
             sorted = sortedInsert(sorted, current);
             current = next;
         }
 
         // maakt laatste value tail
-        Doubly_ListNode current_2 = head;
+        ListNode current_2 = head;
 
         for (int i = 1; i < sorted.nodeCount; i++) {
-            Doubly_ListNode pointer = current_2.next;
+            ListNode pointer = current_2.next;
             current_2 = pointer;
         }
-        sorted.tail = current_2.next;
+        sorted.tail = current_2.next; // !!!
         sorted.tail.next = null;
 
         return sorted;
     }
 
-    static Doubly_Linked_List sortedInsert(Doubly_Linked_List sorted, Doubly_ListNode newNode) {
+    static Linked_List sortedInsert(Linked_List sorted, ListNode newNode) {
         // check of eerste insert is
         if (sorted.head == null) {
             sorted.head = newNode;
@@ -103,39 +94,32 @@ public class Doubly_Linked_List {
             // check of we gewoon head kunnen opschuiven
             if ((sorted.head).data >= newNode.data) {
                 newNode.next = sorted.head;
-                newNode.next.prev = newNode;
                 sorted.head = newNode;
             } else {
                 // loop door de rest waar de node hoort
-                Doubly_ListNode current = sorted.head;
+                ListNode current = sorted.head;
                 for (int i = 1; i < sorted.nodeCount; i++) {
                     if (current.next.data < newNode.data) {
                         current = current.next;
                         newNode.next = current.next;
-                        if (current.next != null) {
-                            newNode.next.prev = newNode;
-                        }
                     }
                 }
                 // insert de node
                 if (current.next != null) {
-                    current.next.prev = newNode;
-                    newNode.next = current.next.prev;
+                    newNode.next = current.next;
+                    current.next = newNode;
                 }
-                current.next = newNode;
-                newNode.prev = current;
             }
         }
-
         sorted.nodeCount++;
         return sorted;
     }
 
-    Boolean simpleSearch(Integer data) throws Exception {
+    public Boolean simpleSearch(Integer data) throws Exception {
         // check of lijst niet leeg is
         if (head != null) {
             // loop door lijst vanaf head op match met data
-            Doubly_ListNode current = head;
+            ListNode current = head;
             for (int i = 1; i < nodeCount; i++) {
                 if (current.data == data) {
                     return true;
@@ -150,26 +134,6 @@ public class Doubly_Linked_List {
         return false;
     }
 
-    void reverseSimpleSearch(Integer data) throws Exception {
-        if (tail != null) {
-            Doubly_ListNode current = tail;
-            while (current.prev != null) {
-                if (current.data == data) {
-                    System.out.println("Gevonden!");
-                }
-                if (current.prev != null) {
-                    current = current.prev;
-                }
-            }
-            // bovenstaande loop skipt head
-            if (head.data == data) {
-                System.out.println("Gevonden!");
-            }
-        } else {
-            throw new Exception("Doubly linked list heeft geen tail");
-        }
-    }
-
     void fastSearch(Integer data) throws Exception {
         // werkt alleen op gesorteerde lijst!
         Integer headDistance = Math.abs(head.data - data);
@@ -179,20 +143,13 @@ public class Doubly_Linked_List {
         if (headDistance == 0 || tailDistance == 0) {
             System.out.println("Gevonden!");
             // check of
-        } else if (head.data < data || tail.data > data) {
-            System.out.println("Niet gevonden!");
         } else {
-            if (headDistance > tailDistance) {
-                System.out.println("vanaf head");
-                simpleSearch(data);
-            } else {
-                reverseSimpleSearch(data);
-            }
+            simpleSearch(data);
         }
     }
 
     void simpleSort() {
-        Doubly_ListNode current = null, index = null;
+        ListNode current = null, index = null;
         int data;
         if (head == null) {
             return;
@@ -208,5 +165,4 @@ public class Doubly_Linked_List {
             }
         }
     }
-
 }

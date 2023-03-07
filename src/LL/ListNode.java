@@ -1,6 +1,7 @@
+package src.LL;
 public class ListNode {
 
-	public Object data;
+	public Integer data;
 	public ListNode next;
 
 	public ListNode() {
@@ -8,12 +9,12 @@ public class ListNode {
 		this.next = null;
 	}
 	
-	public ListNode(Object data) {
+	public ListNode(Integer data) {
 		this.data = data;
 		this.next = null;
 	}
 	
-	public ListNode(Object data, ListNode next) {
+	public ListNode(Integer data, ListNode next) {
 		this.data = data;
 		this.next = next;
 	}
