@@ -12,8 +12,7 @@ public class main {
 
         Linked_List sorted = linkedlist.insertionSort();
 
-        sorted.print_nodes();
-
+        String print = sorted.print_nodes();
     }
 
 }

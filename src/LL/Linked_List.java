@@ -1,5 +1,8 @@
 package src.LL;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class Linked_List {
 
     public ListNode head;
@@ -29,13 +32,19 @@ public class Linked_List {
         nodeCount--;
     }
 
-    public void print_nodes() {
+    public String print_nodes() {
+        List<String> strings = new LinkedList<>();
         ListNode node = head;
         // loop door alle nodes
         for (int i = 1; i <= nodeCount; i++) {
             System.out.println(node.data);
+            strings.add(Integer.toString(node.data));
             node = node.next;
         }
+
+        
+        String message = String.join(",", strings);
+        return message;
     }
 
     public void add(Integer data) {

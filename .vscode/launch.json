@@ -6,6 +6,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "gui",
+            "request": "launch",
+            "mainClass": "src.GUI.gui",
+            "projectName": "AD_eindopdracht_e6e64ff8"
+        },
+        {
+            "type": "java",
+            "name": "solve",
+            "request": "launch",
+            "mainClass": "src.GUI.solve",
+            "projectName": "AD_eindopdracht_e6e64ff8"
+        },
+        {
+            "type": "java",
+            "name": "main",
+            "request": "launch",
+            "mainClass": "src.GUI.main",
+            "projectName": "AD_eindopdracht_e6e64ff8"
+        },
+        {
+            "type": "java",
             "name": "main",
             "request": "launch",
             "mainClass": "src.LL.main",
