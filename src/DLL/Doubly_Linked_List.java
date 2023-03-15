@@ -1,4 +1,4 @@
-package src.DLL;
+package DLL;
 public class Doubly_Linked_List {
 
     public Doubly_ListNode head;
