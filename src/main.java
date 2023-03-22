@@ -23,9 +23,6 @@ public class main {
 //		// sorted.print_nodes();
 //
 //		// d_linkedlist.fastSearch(3);
-
-		Binary_Tree BT = new Binary_Tree();
-		BT.createBinaryTree();
 	}
 
 	public static void linkedlist (String[] args) throws Exception {
