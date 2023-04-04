@@ -1,4 +1,4 @@
-package src.DLL;
+package DLL;
 public class Doubly_ListNode {
 
     public int data;
