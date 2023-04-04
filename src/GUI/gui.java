@@ -49,16 +49,18 @@ public class gui implements ActionListener {
 		pane.add(sort_2);
 		pane.add(datastructure_result);
 
+
+
 		addValue.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String x = String.valueOf(selectbox.getSelectedItem());
-				String value = t1.getText();
-				int value_int = Integer.parseInt(value);
-				if (x == "Linked List") {
-					linkedlist.add(value_int);
-				} else if (x == "Doubly Linked List") {
-					dLinked_List.add(value_int);
-				}
+				// String x = String.valueOf(selectbox.getSelectedItem());
+				// String value = t1.getText();
+				// int value_int = Integer.parseInt(value);
+				// if (x == "Linked List") {
+				// 	linkedlist.add(value_int);
+				// } else if (x == "Doubly Linked List") {
+				// 	dLinked_List.add(value_int);
+				// }
 			}
 		});
 
