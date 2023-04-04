@@ -3,16 +3,10 @@ package BT;
 public class Node {
 
     int key;
-    String name;
     Node leftChild;
     Node rightChild;
 
-    Node (int key, String name) {
+    Node (int key) {
         this.key = key;
-        this.name=name;
-    }
-
-    public String toString() {
-        return name + " has a key " + key;
     }
 }
