@@ -4,25 +4,9 @@ public class Binary_Tree {
 
     Node root;
 
-    public static void main(String[] args) {
-        Binary_Tree binaryTree = new Binary_Tree();
+    public void addNode(int key) {
 
-        binaryTree.addNode(50, "1");
-        binaryTree.addNode(25, "2");
-        binaryTree.addNode(15, "3");
-        binaryTree.addNode(30, "4");
-        binaryTree.addNode(75, "5");
-        binaryTree.addNode(85, "6");
-
-        System.out.println("Remove Key 25: " + binaryTree.removeNode(25));
-
-        binaryTree.preOrderTraversal(binaryTree.root);
-
-    }
-
-    public void addNode(int key, String name) {
-
-        Node newNode = new Node(key, name);
+        Node newNode = new Node(key);
 
         if (root == null) {
             root = newNode;
