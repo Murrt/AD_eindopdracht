@@ -42,7 +42,6 @@ public class Linked_List {
             node = node.next;
         }
 
-        
         String message = String.join(",", strings);
         return message;
     }
@@ -157,7 +156,7 @@ public class Linked_List {
         }
     }
 
-    void simpleSort() {
+    public void simpleSort() {
         ListNode current = null, index = null;
         int data;
         if (head == null) {

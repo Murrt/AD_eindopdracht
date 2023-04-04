@@ -1,4 +1,8 @@
 package DLL;
+
+import java.util.LinkedList;
+import java.util.List;
+
 public class Doubly_Linked_List {
 
     public Doubly_ListNode head;
@@ -36,13 +40,21 @@ public class Doubly_Linked_List {
         nodeCount--;
     }
 
-    public void print_nodes() {
+    public String print_nodes() {
+        List<String> strings = new LinkedList<>();
         Doubly_ListNode node = head;
         // loop door alle nodes
         for (int i = 1; i < nodeCount; i++) {
             System.out.println(node.data);
+            strings.add(Integer.toString(node.data));
             node = node.next;
         }
+
+        System.out.println(node.data);
+        strings.add(Integer.toString(node.data));
+
+        String message = String.join(",", strings);
+        return message;
     }
 
     public void add(Integer data) {
@@ -88,7 +100,7 @@ public class Doubly_Linked_List {
             Doubly_ListNode pointer = current_2.next;
             current_2 = pointer;
         }
-        sorted.tail = current_2.next; //!!!
+        sorted.tail = current_2.next; // !!!
         sorted.tail.next = null;
 
         return sorted;
@@ -190,7 +202,7 @@ public class Doubly_Linked_List {
         }
     }
 
-    void simpleSort() {
+    public void simpleSort() {
         Doubly_ListNode current = null, index = null;
         int data;
         if (head == null) {

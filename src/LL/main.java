@@ -10,9 +10,16 @@ public class main {
         linkedlist.add(3);
         linkedlist.add(4);
 
+        String print0 = linkedlist.print_nodes();
+
+        System.out.println(print0);
+
         Linked_List sorted = linkedlist.insertionSort();
 
         String print = sorted.print_nodes();
+
+        System.out.println(print);
+
     }
 
 }
