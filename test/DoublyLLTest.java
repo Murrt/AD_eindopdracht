@@ -19,6 +19,12 @@ public class DoublyLLTest {
     }
 
     @Test
+    void printTest() throws Exception {
+        String testy = d_linkedlist.print_nodes();
+        System.out.println(testy);
+    }
+
+    @Test
     void addAndRemoveTest() throws Exception {
     d_linkedlist.remove(1);
     assertEquals(d_linkedlist.nodeCount, 3);
