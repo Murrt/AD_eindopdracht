@@ -1,13 +1,18 @@
 package BT;
 
 public class Node {
-    int value;
-    Node left;
-    Node right;
 
-    Node (int value) {
-        this.value = value;
-        right = null;
-        left = null;
+    int key;
+    String name;
+    Node leftChild;
+    Node rightChild;
+
+    Node (int key, String name) {
+        this.key = key;
+        this.name=name;
+    }
+
+    public String toString() {
+        return name + " has a key " + key;
     }
 }
