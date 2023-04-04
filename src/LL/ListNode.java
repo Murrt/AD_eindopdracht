@@ -1,4 +1,4 @@
-package LL;
+package src.LL;
 public class ListNode {
 
 	public Integer data;
