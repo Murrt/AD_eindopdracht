@@ -25,13 +25,22 @@ public class gui implements ActionListener {
 	private static TextField t1, t2;
 
 	public static void addComponentsToPane(Container pane) {
+
+		String s1[] = { "Linked List", "Doubly Linked List" };
+
 		pane.setLayout(null);
 
 		Doubly_Linked_List dLinked_List = new Doubly_Linked_List();
 		Linked_List linkedlist = new Linked_List();
 		Binary_Tree binary_Tree = new Binary_Tree();
 
-		String s1[] = { "Linked List", "Doubly Linked List", "Binary Tree"};
+		JButton datastructuurButton = new JButton("Selecteer Datastructuur");
+		ButtonGroup datastructureGroup = new ButtonGroup();
+
+		JRadioButton linkedList = new JRadioButton("Linked List");
+		JRadioButton doublyLinkedList = new JRadioButton("Doubly Linked List");
+		JRadioButton binaryTree = new JRadioButton("Binary Tree");
+
 		JComboBox selectbox = new JComboBox(s1);
 		JLabel selectbox_text = new JLabel("select your datastructure");
 		JLabel result = new JLabel();
@@ -48,11 +57,20 @@ public class gui implements ActionListener {
 
 		JButton btSortButton = new JButton("Sort");
 
+		ButtonGroup traverselGroup = new ButtonGroup();
+
+		pane.add(linkedList);
+		pane.add(doublyLinkedList);
+		pane.add(binaryTree);
+
+		datastructureGroup.add(linkedList);
+		datastructureGroup.add(doublyLinkedList);
+		datastructureGroup.add(binaryTree);
+
+		pane.add(datastructuurButton);
 
 		t1 = new TextField("enter value");
 		t2 = new TextField("enter search value");
-
-		ButtonGroup traverselGroup = new ButtonGroup();
 
 		pane.add(preOT);
 		pane.add(inOT);
@@ -76,6 +94,51 @@ public class gui implements ActionListener {
 		pane.add(sort_1);
 		pane.add(sort_2);
 		pane.add(datastructure_result);
+
+		// Datastructure Radio Buttons
+		linkedList.setBounds(25, 25, 150, 20);
+		doublyLinkedList.setBounds(25, 50, 150, 20);
+		binaryTree.setBounds(25, 75, 150, 20);
+
+		datastructuurButton.setBounds(25, 125, 200, 20);
+
+		datastructuurButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (linkedList.isSelected()) {
+
+				} else if (doublyLinkedList.isSelected()) {
+
+				} else if (binaryTree.isSelected()) {
+
+					// Tree Traversel Radio Buttons
+					preOT.setBounds(500, 25, 200, 20);
+					inOT.setBounds(500, 50, 200, 20);
+					postOT.setBounds(500, 75, 200, 20);
+
+					// Binary Tree Sort button
+					btSortButton.setBounds(500, 125, 100, 20);
+
+					btSortButton.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							if (preOT.isSelected()) {
+
+								binary_Tree.preOrderTraversal(null);
+
+							} else if (inOT.isSelected()) {
+
+								binary_Tree.inOrderTraversal(null);
+
+							} else if (postOT.isSelected()) {
+
+								binary_Tree.postOrderTraversal(null);
+
+							}
+						}
+					});
+
+				}
+			}
+		});
 
 		addValue.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -171,32 +234,6 @@ public class gui implements ActionListener {
 		selectbox_text.setBounds(25 + insets.left, 5 + insets.top,
 				size.width, size.height);
 		size = result.getPreferredSize();
-
-		// Tree Traversel Radio Buttons
-		preOT.setBounds(500,25,200,20);
-		inOT.setBounds(500,50,200,20);
-		postOT.setBounds(500,75,200,20);
-
-		// Binary Tree Sort button
-		btSortButton.setBounds(500,125,100,20);
-
-		btSortButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (preOT.isSelected()) {
-
-					binary_Tree.preOrderTraversal(null);
-					
-				} else if (inOT.isSelected()) {
-
-					binary_Tree.inOrderTraversal(null);
-
-				} else if (postOT.isSelected()) {
-
-					binary_Tree.postOrderTraversal(null);
-
-				}
-			}
-		});
 
 		// button
 		// size = selectButton.getPreferredSize();
