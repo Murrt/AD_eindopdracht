@@ -8,6 +8,13 @@
             "type": "java",
             "name": "gui",
             "request": "launch",
+            "mainClass": "GUI.gui",
+            "projectName": "AD_eindopdracht_e6e64ff8"
+        },
+        {
+            "type": "java",
+            "name": "gui",
+            "request": "launch",
             "mainClass": "src.GUI.gui",
             "projectName": "AD_eindopdracht_e6e64ff8"
         },

@@ -1,14 +1,19 @@
-package src.GUI;
+package GUI;
 
 import java.awt.Container;
 import java.awt.Insets;
+import java.awt.TextField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.Dimension;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-public class gui {
+public class gui implements ActionListener {
+	private static TextField t1;
+
 	public static void addComponentsToPane(Container pane) {
 		pane.setLayout(null);
 
@@ -16,26 +21,45 @@ public class gui {
 		JComboBox selectbox = new JComboBox(s1);
 		JLabel selectbox_text = new JLabel("select your datastructure");
 		JLabel result = new JLabel();
-		JButton select = new JButton("Select");
+		JButton selectButton = new JButton("Select");
+
+		t1 = new TextField("Welcome to Javatpoint.");
 
 		pane.add(selectbox);
 		pane.add(selectbox_text);
 		pane.add(result);
-		pane.add(select);
+		pane.add(selectButton);
+		pane.add(t1);
+
+		selectButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String x = String.valueOf(selectbox.getSelectedItem());
+				result.setText(x);
+			}
+		});
 
 		Insets insets = pane.getInsets();
+		// selectbox
 		Dimension size = selectbox.getPreferredSize();
-		selectbox.setBounds(25 + insets.left, 5 + insets.top,
+		selectbox.setBounds(25 + insets.left, 25 + insets.top,
 				size.width, size.height);
+		// selectbox text
 		size = selectbox_text.getPreferredSize();
-		selectbox_text.setBounds(55 + insets.left, 40 + insets.top,
+		selectbox_text.setBounds(25 + insets.left, 5 + insets.top,
 				size.width, size.height);
 		size = result.getPreferredSize();
-		result.setBounds(150 + insets.left, 15 + insets.top,
-				size.width + 50, size.height + 20);
-		size = select.getPreferredSize();
-		select.setBounds(250 + insets.left, 15 + insets.top,
-				size.width + 50, size.height + 20);
+
+		// button
+		size = selectButton.getPreferredSize();
+		selectButton.setBounds(25 + insets.left, 75 + insets.top,
+				size.width + 25, size.height + 25);
+		// result
+		result.setBounds(25 + insets.left, 110 + insets.top,
+				size.width + 100, size.height + 50);
+
+		// textfield
+		result.setBounds(25 + insets.left, 130 + insets.top,
+				size.width + 100, size.height + 50);
 	}
 
 	private static void createAndShowGUI() {
@@ -48,8 +72,8 @@ public class gui {
 
 		// Size and display the window.
 		Insets insets = frame.getInsets();
-		frame.setSize(500 + insets.left + insets.right,
-				300 + insets.top + insets.bottom);
+		frame.setSize(1000 + insets.left + insets.right,
+				600 + insets.top + insets.bottom);
 		frame.setVisible(true);
 	}
 
@@ -61,5 +85,11 @@ public class gui {
 				createAndShowGUI();
 			}
 		});
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
 	}
 }

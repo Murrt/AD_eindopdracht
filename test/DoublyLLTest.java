@@ -5,8 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import src.*;
-import src.DLL.Doubly_Linked_List;
+import DLL.Doubly_Linked_List;
 
 public class DoublyLLTest {
     Doubly_Linked_List d_linkedlist = new Doubly_Linked_List();
