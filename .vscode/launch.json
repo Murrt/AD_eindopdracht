@@ -9,6 +9,13 @@
             "name": "gui",
             "request": "launch",
             "mainClass": "GUI.gui",
+            "projectName": "AD_eindopdracht_2a7304f0"
+        },
+        {
+            "type": "java",
+            "name": "gui",
+            "request": "launch",
+            "mainClass": "GUI.gui",
             "projectName": "AD_eindopdracht_e6e64ff8"
         },
         {
