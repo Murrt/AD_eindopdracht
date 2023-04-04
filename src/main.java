@@ -1,4 +1,6 @@
-import DLL.Doubly_Linked_List;
+package src;
+
+import src.DLL.Doubly_Linked_List;
 
 public class main {
 	public static void main(String[] args) throws Exception {
