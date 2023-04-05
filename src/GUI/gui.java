@@ -100,7 +100,7 @@ public class gui implements ActionListener {
 		doublyLinkedList.setBounds(25, 50, 150, 20);
 		binaryTree.setBounds(25, 75, 150, 20);
 
-		datastructuurButton.setBounds(25, 125, 200, 20);
+		datastructuurButton.setBounds(25, 100, 200, 20);
 
 		datastructuurButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
