@@ -43,6 +43,7 @@ public class Doubly_Linked_List {
     public String print_nodes() {
         List<String> strings = new LinkedList<>();
         Doubly_ListNode node = head;
+        
         // loop door alle nodes
         for (int i = 1; i < nodeCount; i++) {
             System.out.println(node.data);

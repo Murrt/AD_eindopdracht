@@ -33,16 +33,26 @@ public class Linked_List {
     }
 
     public String print_nodes() {
+        System.out.println("-----------------");
+        System.out.println("Node count: " + nodeCount);
+        System.out.println("Node head: " + head.data);
+        System.out.println("Node tail: " + tail.data);
+
         List<String> strings = new LinkedList<>();
         ListNode node = head;
         // loop door alle nodes
         for (int i = 1; i <= nodeCount; i++) {
-            System.out.println(node.data);
-            strings.add(Integer.toString(node.data));
+            if (node.data != null) {
+                System.out.println(node.data);
+                strings.add(Integer.toString(node.data));
+            }
             node = node.next;
+
         }
 
         String message = String.join(",", strings);
+        System.out.println("-----------------");
+
         return message;
     }
 
