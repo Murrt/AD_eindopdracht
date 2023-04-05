@@ -2,7 +2,7 @@ package BT;
 
 public class Binary_Tree {
 
-    Node root;
+    public Node root;
 
     public void addNode(int key) {
 

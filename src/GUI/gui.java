@@ -15,6 +15,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
+import javax.swing.JTextField;
 
 import BT.Binary_Tree;
 import BT.Node;
@@ -30,7 +31,7 @@ public class gui implements ActionListener {
 	static Linked_List linkedlist = new Linked_List();
 	private static Binary_Tree binary_Tree = new Binary_Tree();
 
-	private static JButton datastructuurButton = new JButton("Selecteer Datastructuur");
+	private static JButton selectDatastructuurButton = new JButton("Selecteer Datastructuur");
 	private static ButtonGroup datastructureGroup = new ButtonGroup();
 
 	private static JRadioButton linkedList = new JRadioButton("Linked List");
@@ -45,15 +46,20 @@ public class gui implements ActionListener {
 	private static JButton sort_2 = new JButton("sort 2");
 	private static JLabel datastructure_result = new JLabel();
 
-	// BT Buttons
+	// BT Tree Traversel Buttons
 	private static JRadioButton preOT = new JRadioButton("Pre Order Traversel");
 	private static JRadioButton inOT = new JRadioButton("In Order Traversel");
 	private static JRadioButton postOT = new JRadioButton("Post Order Traversel");
-
-	private static JButton btSortButton = new JButton("Sort");
-	private static JButton llSortButton = new JButton("Sort");
-
 	private static ButtonGroup traverselGroup = new ButtonGroup();
+	private static JButton btSortButton = new JButton("Sort");
+
+	// BT Search Field & Button
+	private JTextField btSearchField = new JTextField(25);
+	private Container btSearchFieldContainer = new Container(); 
+	private JLabel  btSearchFieldLabel = new JLabel();
+
+	private static JButton btSearchButton = new JButton("Search");
+
 
 	// LL Buttons
 	private static JRadioButton simpleSort = new JRadioButton("Simple sort");
@@ -61,6 +67,7 @@ public class gui implements ActionListener {
 	private static JRadioButton fastSearch = new JRadioButton("Fast search");
 	private static JRadioButton simpleSearch = new JRadioButton("Simple search");
 	private static JButton llButton = new JButton("Sort");
+	private static JButton llSortButton = new JButton("Sort");
 
 	private static ButtonGroup llGroup = new ButtonGroup();
 
@@ -77,10 +84,15 @@ public class gui implements ActionListener {
 		datastructureGroup.add(doublyLinkedList);
 		datastructureGroup.add(binaryTree);
 
-		pane.add(datastructuurButton);
+		pane.add(selectDatastructuurButton);
+
+		linkedList.setBounds(25, 25, 150, 20);
+		doublyLinkedList.setBounds(25, 50, 150, 20);
+		binaryTree.setBounds(25, 75, 150, 20);
+
+		selectDatastructuurButton.setBounds(25, 100, 200, 20);
 
 		// Linkedlist radio button group
-
 		pane.add(simpleSort);
 		pane.add(insertionSort);
 		pane.add(fastSearch);
@@ -103,14 +115,6 @@ public class gui implements ActionListener {
 		addValueTextField = new TextField("enter value");
 		searchValueTextField = new TextField("enter search value");
 
-		pane.add(preOT);
-		pane.add(inOT);
-		pane.add(postOT);
-
-		traverselGroup.add(preOT);
-		traverselGroup.add(inOT);
-		traverselGroup.add(postOT);
-
 		pane.add(btSortButton);
 		pane.add(llSortButton);
 
@@ -126,21 +130,25 @@ public class gui implements ActionListener {
 		pane.add(datastructure_result);
 
 		// Tree Traversel Radio Buttons
+		pane.add(preOT);
+		pane.add(inOT);
+		pane.add(postOT);
+
+		traverselGroup.add(preOT);
+		traverselGroup.add(inOT);
+		traverselGroup.add(postOT);
+
 		preOT.setBounds(500, 25, 200, 20);
 		inOT.setBounds(500, 50, 200, 20);
 		postOT.setBounds(500, 75, 200, 20);
 
-		simpleSort.setBounds(500, 25, 200, 20);
-		insertionSort.setBounds(500, 50, 200, 20);
+		// Binary Tree search field & button
+		
+
 
 		// Linked list sort buttons
-
-		// Datastructure Radio Buttons
-		linkedList.setBounds(25, 25, 150, 20);
-		doublyLinkedList.setBounds(25, 50, 150, 20);
-		binaryTree.setBounds(25, 75, 150, 20);
-
-		datastructuurButton.setBounds(25, 100, 200, 20);
+		simpleSort.setBounds(500, 25, 200, 20);
+		insertionSort.setBounds(500, 50, 200, 20);
 
 		// textfield
 		addValueTextField.setBounds(25, 225, 150, 20);
@@ -162,7 +170,7 @@ public class gui implements ActionListener {
 		// Binary Tree Sort button
 		llSortButton.setBounds(500, 125, 100, 20);
 
-		datastructuurButton.addActionListener(new ActionListener() {
+		selectDatastructuurButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (linkedList.isSelected()) {
 
@@ -188,25 +196,31 @@ public class gui implements ActionListener {
 				} else if (doublyLinkedList.isSelected()) {
 
 				} else if (binaryTree.isSelected()) {
+					setInvis();
+					preOT.setVisible(true);
+					inOT.setVisible(true);
+					postOT.setVisible(true);
+					btSortButton.setVisible(true);
+
+
 
 					btSortButton.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							if (preOT.isSelected()) {
 
-								binary_Tree.preOrderTraversal(null);
+								binary_Tree.preOrderTraversal(binary_Tree.root);
 
 							} else if (inOT.isSelected()) {
 
-								binary_Tree.inOrderTraversal(null);
+								binary_Tree.inOrderTraversal(binary_Tree.root);
 
 							} else if (postOT.isSelected()) {
 
-								binary_Tree.postOrderTraversal(null);
+								binary_Tree.postOrderTraversal(binary_Tree.root);
 
 							}
 						}
 					});
-
 				}
 			}
 		});
@@ -219,6 +233,7 @@ public class gui implements ActionListener {
 				// add to all datastructures
 				linkedlist.add(value_int);
 				dLinked_List.add(value_int);
+				binary_Tree.addNode(value_int);
 
 				// print
 				String res = linkedlist.print_nodes();
@@ -252,6 +267,7 @@ public class gui implements ActionListener {
 		inOT.setVisible(false);
 		postOT.setVisible(false);
 		btSortButton.setVisible(false);
+		llSortButton.setVisible(false);
 	}
 
 	public static void main(String[] args) {
