@@ -14,25 +14,49 @@ public class Linked_List {
     }
 
     public void remove(Integer index) throws Exception {
-        if (index < 1 || index > nodeCount) {
+        if (index < 0 || index > nodeCount) {
+            System.out.println(nodeCount);
             throw new Exception("ongeldige index");
         } else {
+            if (index == 0) {
+                if (nodeCount == 0) {
+                    head = head.next;
+                } else {
+                    head = null;
+                }
+            } else if (index == nodeCount) {
+                ListNode current = head;
+                for (Integer i = 0; i < nodeCount; i++) {
+                    if (i == (nodeCount - 1)) {
+                        current.next = null;
+                        tail = current;
+                    }
+                    current = current.next;
+                }
+            } else {
+                ListNode current = head;
+                ListNode ref = new ListNode();
 
-            ListNode current = head;
-            ListNode last_ref;
-            ListNode next_ref;
-
-            for (Integer i = 0; i < nodeCount; i++) {
-                System.out.print(current.data);
-                current = current.next;
+                for (Integer i = 0; i > nodeCount; i++) {
+                    if (i == (index + 1)) {
+                        ref = current;
+                    }
+                    if (i == (index - 1)) {
+                        current.next = ref;
+                    }
+                    if (current.next != null) {
+                        current = current.next;
+                    }
+                }
             }
-            // [0,1][1,2][2,3][3,4]
         }
-
         nodeCount--;
     }
 
     public String print_nodes() {
+        if (nodeCount == 0) {
+            return null;
+        }
         System.out.println("-----------------");
         System.out.println("Node count: " + nodeCount);
         System.out.println("Node head: " + head.data);
@@ -138,7 +162,10 @@ public class Linked_List {
         if (head != null) {
             // loop door lijst vanaf head op match met data
             ListNode current = head;
+            System.out.println("Gezocht: " + data);
+
             for (int i = 1; i < nodeCount; i++) {
+                System.out.println("Gevonden: " + current.data);
                 if (current.data == data) {
                     return true;
                 }
@@ -152,17 +179,16 @@ public class Linked_List {
         return false;
     }
 
-    void fastSearch(Integer data) throws Exception {
+    public Boolean fastSearch(Integer data) throws Exception {
         // werkt alleen op gesorteerde lijst!
         Integer headDistance = Math.abs(head.data - data);
         Integer tailDistance = Math.abs(tail.data - data);
 
         // check of data in head of tail zit
         if (headDistance == 0 || tailDistance == 0) {
-            System.out.println("Gevonden!");
-            // check of
+            return true;// check of
         } else {
-            simpleSearch(data);
+            return simpleSearch(data);
         }
     }
 

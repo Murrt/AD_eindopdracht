@@ -55,11 +55,17 @@ public class gui implements ActionListener {
 	private static JButton btSortButton = new JButton("bt Sort");
 
 	// BT Search Field & Button
-	private JTextField btSearchField = new JTextField(25);
-	private Container btSearchFieldContainer = new Container();
-	private JLabel btSearchFieldLabel = new JLabel();
+	private static JTextField btSearchField = new JTextField(25);
+	private static Container btSearchFieldContainer = new Container();
+	private static JLabel btSearchFieldLabel = new JLabel();
 
 	private static JButton btSearchButton = new JButton("Search");
+	private static JButton btSearchButton2 = new JButton("Search2");
+
+	// BT Delete Field & Button
+	private static JTextField btDeleteField = new JTextField(25);
+	private static JLabel btDeleteFieldLabel = new JLabel("Delete number:");
+	private static JButton btDeleteButton = new JButton("Delete");
 
 	// LL Buttons
 	private static JRadioButton simpleSortLL = new JRadioButton("Simple sort");
@@ -165,6 +171,24 @@ public class gui implements ActionListener {
 		postOT.setBounds(500, 75, 200, 20);
 
 		// Binary Tree search field & button
+		pane.add(btSearchField);
+		pane.add(btSearchFieldLabel);
+		pane.add(btSearchButton);
+		pane.add(btSearchButton2);
+
+		btSearchField.setBounds(825, 25, 100, 20);
+		btSearchFieldLabel.setBounds(700, 25, 200, 20);
+		btSearchButton.setBounds(825, 50, 100, 20);
+		btSearchButton2.setBounds(825, 75, 100, 20);
+
+		// Binary Tree search field & button
+		pane.add(btDeleteField);
+		pane.add(btDeleteFieldLabel);
+		pane.add(btDeleteButton);
+
+		btDeleteField.setBounds(825, 100, 100, 20);
+		btDeleteFieldLabel.setBounds(725, 100, 200, 20);
+		btDeleteButton.setBounds(825, 125, 100, 20);
 
 		// Linked list sort buttons
 		simpleSortLL.setBounds(500, 25, 200, 20);
@@ -199,8 +223,17 @@ public class gui implements ActionListener {
 
 		selectDatastructuurButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				setInvis();
+
+				btSearchField.setVisible(true);
+				btSearchButton.setVisible(true);
+				btSearchButton2.setVisible(true);
+				btSearchFieldLabel.setVisible(true);
+				btDeleteField.setVisible(true);
+				btDeleteButton.setVisible(true);
+				btDeleteFieldLabel.setVisible(true);
+
 				if (rblinkedList.isSelected()) {
-					setInvis();
 					simpleSortLL.setVisible(true);
 					insertionSortLL.setVisible(true);
 					llSortButton.setVisible(true);
@@ -212,7 +245,7 @@ public class gui implements ActionListener {
 								String res = linkedlist.print_nodes();
 								datastructure_result.setText(res);
 							} else if (insertionSortLL.isSelected()) {
-								Linked_List sorted = linkedlist.insertionSort();
+								sorted = linkedlist.insertionSort();
 								linkedlist = sorted;
 								String print = linkedlist.print_nodes();
 								System.out.println(print);
@@ -220,8 +253,62 @@ public class gui implements ActionListener {
 						}
 					});
 
+					btSearchButton.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							String value = btSearchField.getText();
+							int value_int = Integer.parseInt(value);
+							Boolean res;
+							try {
+								res = linkedlist.simpleSearch(value_int);
+								if (res) {
+									datastructure_result.setText("Gevonden!");
+								} else {
+									datastructure_result.setText("Niet Gevonden");
+									System.out.println("niet gevonden");
+								}
+							} catch (Exception e1) {
+								e1.printStackTrace();
+								System.out.println();
+							}
+						}
+					});
+
+					btSearchButton2.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							String value = btSearchField.getText();
+							int value_int = Integer.parseInt(value);
+							Boolean res;
+							try {
+								res = linkedlist.fastSearch(value_int);
+								if (res) {
+									datastructure_result.setText("Gevonden!");
+								} else {
+									datastructure_result.setText("Niet Gevonden");
+									System.out.println("niet gevonden");
+								}
+							} catch (Exception e1) {
+								e1.printStackTrace();
+								System.out.println();
+							}
+						}
+					});
+
+					btDeleteButton.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							String value = btDeleteField.getText();
+							int value_int = Integer.parseInt(value);
+							try {
+								linkedlist.remove(value_int);
+								linkedlist.print_nodes();
+								String res = linkedlist.print_nodes();
+								datastructure_result.setText(res);
+							} catch (Exception e1) {
+								e1.printStackTrace();
+							}
+						}
+					});
+
 				} else if (rbdoublyLinkedList.isSelected()) {
-					setInvis();
 					simpleSortDLL.setVisible(true);
 					insertionSortDLL.setVisible(true);
 					dllSortButton.setVisible(true);
@@ -241,7 +328,6 @@ public class gui implements ActionListener {
 						}
 					});
 				} else if (rbbinaryTree.isSelected()) {
-					setInvis();
 					preOT.setVisible(true);
 					inOT.setVisible(true);
 					postOT.setVisible(true);
@@ -262,6 +348,23 @@ public class gui implements ActionListener {
 								binary_Tree.postOrderTraversal(binary_Tree.root);
 
 							}
+						}
+					});
+					btSearchButton.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							String value = btSearchField.getText();
+							int value_int = Integer.parseInt(value);
+
+							binary_Tree.findNode(value_int);
+						}
+					});
+
+					btDeleteButton.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							String value = btDeleteField.getText();
+							int value_int = Integer.parseInt(value);
+
+							binary_Tree.removeNode(value_int);
 						}
 					});
 				}
@@ -311,6 +414,13 @@ public class gui implements ActionListener {
 		btSortButton.setVisible(false);
 		llSortButton.setVisible(false);
 		dllSortButton.setVisible(false);
+		btSearchField.setVisible(false);
+		btSearchButton.setVisible(false);
+		btSearchButton2.setVisible(false);
+		btSearchFieldLabel.setVisible(false);
+		btDeleteField.setVisible(false);
+		btDeleteButton.setVisible(false);
+		btDeleteFieldLabel.setVisible(false);
 	}
 
 	public static void main(String[] args) {

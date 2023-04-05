@@ -4,6 +4,21 @@ public class Binary_Tree {
 
     public Node root;
 
+    public String print_nodes() {
+        List<String> strings = new LinkedList<>();
+        ListNode node = head;
+        // loop door alle nodes
+        for (int i = 1; i <= nodeCount; i++) {
+            System.out.println(node.data);
+            strings.add(Integer.toString(node.data));
+            node = node.next;
+        }
+
+        String message = String.join(",", strings);
+        return message;
+    }
+
+
     public void addNode(int key) {
 
         Node newNode = new Node(key);
@@ -76,6 +91,7 @@ public class Binary_Tree {
                 return null;
             }
         }
+        System.out.println(focusNode);
         return focusNode;
     }
 
