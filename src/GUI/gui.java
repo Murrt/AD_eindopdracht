@@ -22,37 +22,86 @@ import LL.Linked_List;
 import DLL.Doubly_Linked_List;
 
 public class gui implements ActionListener {
-	private static TextField t1, t2;
+	private static TextField addValueTextField, searchValueTextField;
+
+	String s1[] = { "Linked List", "Doubly Linked List" };
+
+	private static Doubly_Linked_List dLinked_List = new Doubly_Linked_List();
+	static Linked_List linkedlist = new Linked_List();
+	private static Binary_Tree binary_Tree = new Binary_Tree();
+
+	private static JButton datastructuurButton = new JButton("Selecteer Datastructuur");
+	private static ButtonGroup datastructureGroup = new ButtonGroup();
+
+	private static JRadioButton linkedList = new JRadioButton("Linked List");
+	private static JRadioButton doublyLinkedList = new JRadioButton("Doubly Linked List");
+	private static JRadioButton binaryTree = new JRadioButton("Binary Tree");
+
+	private static JLabel selectbox_text = new JLabel("select your datastructure");
+	private static JLabel result = new JLabel();
+	private static JButton addValue = new JButton("Add");
+	private static JButton searchValue = new JButton("Search");
+	private static JButton sort_1 = new JButton("sort 1");
+	private static JButton sort_2 = new JButton("sort 2");
+	private static JLabel datastructure_result = new JLabel();
+
+	// BT Buttons
+	private static JRadioButton preOT = new JRadioButton("Pre Order Traversel");
+	private static JRadioButton inOT = new JRadioButton("In Order Traversel");
+	private static JRadioButton postOT = new JRadioButton("Post Order Traversel");
+
+	private static JButton btSortButton = new JButton("Sort");
+	private static JButton llSortButton = new JButton("Sort");
+
+	private static ButtonGroup traverselGroup = new ButtonGroup();
+
+	// LL Buttons
+	private static JRadioButton simpleSort = new JRadioButton("Simple sort");
+	private static JRadioButton insertionSort = new JRadioButton("Insertion sort");
+	private static JRadioButton fastSearch = new JRadioButton("Fast search");
+	private static JRadioButton simpleSearch = new JRadioButton("Simple search");
+	private static JButton llButton = new JButton("Sort");
+
+	private static ButtonGroup llGroup = new ButtonGroup();
 
 	public static void addComponentsToPane(Container pane) {
+
 		pane.setLayout(null);
 
-		Doubly_Linked_List dLinked_List = new Doubly_Linked_List();
-		Linked_List linkedlist = new Linked_List();
-		Binary_Tree binary_Tree = new Binary_Tree();
+		// Datastructure radio button group
+		pane.add(linkedList);
+		pane.add(doublyLinkedList);
+		pane.add(binaryTree);
 
-		String s1[] = { "Linked List", "Doubly Linked List", "Binary Tree"};
-		JComboBox selectbox = new JComboBox(s1);
-		JLabel selectbox_text = new JLabel("select your datastructure");
-		JLabel result = new JLabel();
-		JButton addValue = new JButton("Add");
-		JButton searchValue = new JButton("Search");
-		JButton sort_1 = new JButton("sort 1");
-		JButton sort_2 = new JButton("sort 2");
-		JLabel datastructure_result = new JLabel();
-		JButton pButton = new JButton("Print");
+		datastructureGroup.add(linkedList);
+		datastructureGroup.add(doublyLinkedList);
+		datastructureGroup.add(binaryTree);
 
-		JRadioButton preOT = new JRadioButton("Pre Order Traversel");
-		JRadioButton inOT = new JRadioButton("In Order Traversel");
-		JRadioButton postOT = new JRadioButton("Post Order Traversel");
+		pane.add(datastructuurButton);
 
-		JButton btSortButton = new JButton("Sort");
+		// Linkedlist radio button group
 
+		pane.add(simpleSort);
+		pane.add(insertionSort);
+		pane.add(fastSearch);
+		pane.add(simpleSearch);
 
-		t1 = new TextField("enter value");
-		t2 = new TextField("enter search value");
+		llGroup.add(simpleSort);
+		llGroup.add(insertionSort);
+		llGroup.add(fastSearch);
+		llGroup.add(simpleSearch);
 
-		ButtonGroup traverselGroup = new ButtonGroup();
+		pane.add(llButton);
+
+		simpleSort.setVisible(false);
+		insertionSort.setVisible(false);
+		fastSearch.setVisible(false);
+		simpleSearch.setVisible(false);
+
+		//
+
+		addValueTextField = new TextField("enter value");
+		searchValueTextField = new TextField("enter search value");
 
 		pane.add(preOT);
 		pane.add(inOT);
@@ -63,178 +112,120 @@ public class gui implements ActionListener {
 		traverselGroup.add(postOT);
 
 		pane.add(btSortButton);
+		pane.add(llSortButton);
 
-		pane.add(selectbox);
 		pane.add(selectbox_text);
 		pane.add(result);
-		pane.add(t1);
-		pane.add(t2);
+		pane.add(addValueTextField);
+		pane.add(searchValueTextField);
 
 		pane.add(addValue);
 		pane.add(searchValue);
-		pane.add(pButton);
 		pane.add(sort_1);
 		pane.add(sort_2);
 		pane.add(datastructure_result);
 
+		// Tree Traversel Radio Buttons
+		preOT.setBounds(500, 25, 200, 20);
+		inOT.setBounds(500, 50, 200, 20);
+		postOT.setBounds(500, 75, 200, 20);
 
+		simpleSort.setBounds(500, 25, 200, 20);
+		insertionSort.setBounds(500, 50, 200, 20);
+
+		// Linked list sort buttons
+
+		// Datastructure Radio Buttons
+		linkedList.setBounds(25, 25, 150, 20);
+		doublyLinkedList.setBounds(25, 50, 150, 20);
+		binaryTree.setBounds(25, 75, 150, 20);
+
+		datastructuurButton.setBounds(25, 125, 200, 20);
+
+		// textfield
+		addValueTextField.setBounds(25, 225, 150, 20);
+		// add value button
+		addValue.setBounds(25, 245, 120, 20);
+
+		// textfield
+		searchValueTextField.setBounds(25, 325, 150, 20);
+
+		// add value button
+		searchValue.setBounds(25, 345, 120, 20);
+
+		// datastructure result
+		datastructure_result.setBounds(300, 300, 400, 400);
+
+		// Binary Tree Sort button
+		btSortButton.setBounds(500, 125, 100, 20);
+
+		// Binary Tree Sort button
+		llSortButton.setBounds(500, 125, 100, 20);
+
+		datastructuurButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (linkedList.isSelected()) {
+
+					setInvis();
+					simpleSort.setVisible(true);
+					insertionSort.setVisible(true);
+					llSortButton.setVisible(true);
+
+					llSortButton.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							if (simpleSort.isSelected()) {
+								linkedlist.simpleSort();
+								String res = linkedlist.print_nodes();
+								datastructure_result.setText(res);
+							} else if (insertionSort.isSelected()) {
+								dLinked_List.simpleSort();
+								String res = dLinked_List.print_nodes();
+								datastructure_result.setText(res);
+							}
+						}
+					});
+
+				} else if (doublyLinkedList.isSelected()) {
+
+				} else if (binaryTree.isSelected()) {
+
+					btSortButton.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							if (preOT.isSelected()) {
+
+								binary_Tree.preOrderTraversal(null);
+
+							} else if (inOT.isSelected()) {
+
+								binary_Tree.inOrderTraversal(null);
+
+							} else if (postOT.isSelected()) {
+
+								binary_Tree.postOrderTraversal(null);
+
+							}
+						}
+					});
+
+				}
+			}
+		});
 
 		addValue.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// String x = String.valueOf(selectbox.getSelectedItem());
-				// String value = t1.getText();
-				// int value_int = Integer.parseInt(value);
-				// if (x == "Linked List") {
-				// 	linkedlist.add(value_int);
-				// } else if (x == "Doubly Linked List") {
-				// 	dLinked_List.add(value_int);
-				// }
-			}
-		});
-
-		pButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String x = String.valueOf(selectbox.getSelectedItem());
-				if (x == "Linked List") {
-					String res = linkedlist.print_nodes();
-					datastructure_result.setText(res);
-				} else if (x == "Doubly Linked List") {
-					String res = dLinked_List.print_nodes();
-					datastructure_result.setText(res);
-				}
-			}
-		});
-
-		sort_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String x = String.valueOf(selectbox.getSelectedItem());
-				if (x == "Linked List") {
-					Linked_List sorted = linkedlist.insertionSort();
-					String print = sorted.print_nodes();
-					datastructure_result.setText(print);
-				} else if (x == "Doubly Linked List") {
-					Doubly_Linked_List sorted = dLinked_List.insertionSort();
-					String print = sorted.print_nodes();
-					datastructure_result.setText(print);
-				}
-			}
-		});
-
-		sort_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String x = String.valueOf(selectbox.getSelectedItem());
-				if (x == "Linked List") {
-					linkedlist.simpleSort();
-					String res = linkedlist.print_nodes();
-					datastructure_result.setText(res);
-				} else if (x == "Doubly Linked List") {
-					dLinked_List.simpleSort();
-					String res = dLinked_List.print_nodes();
-					datastructure_result.setText(res);
-				}
-			}
-		});
-
-		searchValue.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String x = String.valueOf(selectbox.getSelectedItem());
-				String value = t2.getText();
+				String value = addValueTextField.getText();
 				int value_int = Integer.parseInt(value);
-				if (x == "Linked List") {
-					try {
-						Boolean res = linkedlist.simpleSearch(value_int);
-						if (res) {
-							datastructure_result.setText(value_int + " Gevonden!");
-						} else {
-							datastructure_result.setText(value_int + " Niet Gevonden!");
-						}
-					} catch (Exception e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
 
-				} else if (x == "Doubly Linked List") {
-					dLinked_List.simpleSort();
-					String res = dLinked_List.print_nodes();
-					datastructure_result.setText(res);
-				}
+				// add to all datastructures
+				linkedlist.add(value_int);
+				dLinked_List.add(value_int);
+
+				// print
+				String res = linkedlist.print_nodes();
+				datastructure_result.setText(res);
 			}
 		});
 
-		Insets insets = pane.getInsets();
-		// selectbox
-		Dimension size = selectbox.getPreferredSize();
-		selectbox.setBounds(25 + insets.left, 25 + insets.top,
-				size.width, size.height);
-		// selectbox text
-		size = selectbox_text.getPreferredSize();
-		selectbox_text.setBounds(25 + insets.left, 5 + insets.top,
-				size.width, size.height);
-		size = result.getPreferredSize();
-
-		// Tree Traversel Radio Buttons
-		preOT.setBounds(500,25,200,20);
-		inOT.setBounds(500,50,200,20);
-		postOT.setBounds(500,75,200,20);
-
-		// Binary Tree Sort button
-		btSortButton.setBounds(500,125,100,20);
-
-		btSortButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (preOT.isSelected()) {
-
-					binary_Tree.preOrderTraversal(null);
-					
-				} else if (inOT.isSelected()) {
-
-					binary_Tree.inOrderTraversal(null);
-
-				} else if (postOT.isSelected()) {
-
-					binary_Tree.postOrderTraversal(null);
-
-				}
-			}
-		});
-
-		// button
-		// size = selectButton.getPreferredSize();
-		// selectButton.setBounds(25 + insets.left, 75 + insets.top,
-		// size.width + 25, size.height + 25);
-		// result
-
-		// textfield
-		t1.setBounds(25 + insets.left, 105 + insets.top,
-				size.width + 150, size.height + 25);
-
-		// textfield
-		t2.setBounds(25 + insets.left, 205 + insets.top,
-				size.width + 150, size.height + 25);
-		// add value button
-
-		addValue.setBounds(25 + insets.left, 75 + insets.top,
-				size.width + 75, size.height + 25);
-
-		// add value button
-		searchValue.setBounds(25 + insets.left, 178 + insets.top,
-				size.width + 75, size.height + 25);
-		// print result
-		size = pButton.getPreferredSize();
-		pButton.setBounds(250 + insets.left, 25 + insets.top,
-				size.width + 50, size.height + 25);
-		// print result
-		size = sort_1.getPreferredSize();
-		sort_1.setBounds(450 + insets.left, 25 + insets.top,
-				size.width + 50, size.height + 25);
-		// print result
-		size = sort_2.getPreferredSize();
-		sort_2.setBounds(650 + insets.left, 25 + insets.top,
-				size.width + 50, size.height + 25);
-
-		// datastructure result
-		datastructure_result.setBounds(250 + insets.left, 50 + insets.top,
-				size.width + 200, size.height + 200);
 	}
 
 	private static void createAndShowGUI() {
@@ -249,7 +240,18 @@ public class gui implements ActionListener {
 		Insets insets = frame.getInsets();
 		frame.setSize(1000 + insets.left + insets.right,
 				600 + insets.top + insets.bottom);
+		setInvis();
 		frame.setVisible(true);
+	}
+
+	private static void setInvis() {
+		simpleSort.setVisible(false);
+		insertionSort.setVisible(false);
+		llSortButton.setVisible(true);
+		preOT.setVisible(false);
+		inOT.setVisible(false);
+		postOT.setVisible(false);
+		btSortButton.setVisible(false);
 	}
 
 	public static void main(String[] args) {
