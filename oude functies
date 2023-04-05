@@ -1,0 +1,69 @@
+
+		pButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String x = String.valueOf(selectbox.getSelectedItem());
+				if (x == "Linked List") {
+					String res = linkedlist.print_nodes();
+					datastructure_result.setText(res);
+				} else if (x == "Doubly Linked List") {
+					String res = dLinked_List.print_nodes();
+					datastructure_result.setText(res);
+				}
+			}
+		});
+
+		sort_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String x = String.valueOf(selectbox.getSelectedItem());
+				if (x == "Linked List") {
+					Linked_List sorted = linkedlist.insertionSort();
+					String print = sorted.print_nodes();
+					datastructure_result.setText(print);
+				} else if (x == "Doubly Linked List") {
+					Doubly_Linked_List sorted = dLinked_List.insertionSort();
+					String print = sorted.print_nodes();
+					datastructure_result.setText(print);
+				}
+			}
+		});
+
+		sort_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String x = String.valueOf(selectbox.getSelectedItem());
+				if (x == "Linked List") {
+					linkedlist.simpleSort();
+					String res = linkedlist.print_nodes();
+					datastructure_result.setText(res);
+				} else if (x == "Doubly Linked List") {
+					dLinked_List.simpleSort();
+					String res = dLinked_List.print_nodes();
+					datastructure_result.setText(res);
+				}
+			}
+		});
+
+		// searchValue.addActionListener(new ActionListener() {
+		// public void actionPerformed(ActionEvent e) {
+		// String x = String.valueOf(selectbox.getSelectedItem());
+		// String value = t2.getText();
+		// int value_int = Integer.parseInt(value);
+		// if (x == "Linked List") {
+		// try {
+		// Boolean res = linkedlist.simpleSearch(value_int);
+		// if (res) {
+		// datastructure_result.setText(value_int + " Gevonden!");
+		// } else {
+		// datastructure_result.setText(value_int + " Niet Gevonden!");
+		// }
+		// } catch (Exception e1) {
+		// // TODO Auto-generated catch block
+		// e1.printStackTrace();
+		// }
+
+		// } else if (x == "Doubly Linked List") {
+		// dLinked_List.simpleSort();
+		// String res = dLinked_List.print_nodes();
+		// datastructure_result.setText(res);
+		// }
+		// }
+		// });
