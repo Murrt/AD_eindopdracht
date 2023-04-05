@@ -14,41 +14,28 @@ public class Linked_List {
     }
 
     public void remove(Integer index) throws Exception {
-        if (index < 0 || index > nodeCount) {
+        index = index + 1;
+        if (index < 1 || index > nodeCount) {
             System.out.println(nodeCount);
             throw new Exception("ongeldige index");
         } else {
             if (index == 0) {
-                if (nodeCount == 0) {
-                    head = head.next;
-                } else {
-                    head = null;
-                }
-            } else if (index == nodeCount) {
+                // removing the first element must be handled specially
+                head = head.next;
+            } else {
+                // loop to the node before the one we want to remove
                 ListNode current = head;
-                for (Integer i = 0; i < nodeCount; i++) {
-                    if (i == (nodeCount - 1)) {
-                        current.next = null;
-                        tail = current;
-                    }
+                for (int i = 0; i < index - 1; i++) {
                     current = current.next;
                 }
-            } else {
-                ListNode current = head;
-                ListNode ref = new ListNode();
-
-                for (Integer i = 0; i > nodeCount; i++) {
-                    if (i == (index + 1)) {
-                        ref = current;
-                    }
-                    if (i == (index - 1)) {
-                        current.next = ref;
-                    }
-                    if (current.next != null) {
-                        current = current.next;
-                    }
+                // skip the node
+                if (current.next != null && current.next.next != null) {
+                    current.next = current.next.next;
+                } else {
+                    head.next = null;
                 }
             }
+
         }
         nodeCount--;
     }

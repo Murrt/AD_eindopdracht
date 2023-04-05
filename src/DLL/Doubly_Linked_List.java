@@ -162,12 +162,13 @@ public class Doubly_Linked_List {
         return false;
     }
 
-    void reverseSimpleSearch(Integer data) throws Exception {
+    public Boolean reverseSimpleSearch(Integer data) throws Exception {
         if (tail != null) {
             Doubly_ListNode current = tail;
             while (current.prev != null) {
                 if (current.data == data) {
                     System.out.println("Gevonden!");
+                    return true;
                 }
                 if (current.prev != null) {
                     current = current.prev;
@@ -176,13 +177,16 @@ public class Doubly_Linked_List {
             // bovenstaande loop skipt head
             if (head.data == data) {
                 System.out.println("Gevonden!");
+                return true;
             }
         } else {
             throw new Exception("Doubly linked list heeft geen tail");
         }
+
+        return false;
     }
 
-    void fastSearch(Integer data) throws Exception {
+    public Boolean fastSearch(Integer data) throws Exception {
         // werkt alleen op gesorteerde lijst!
         Integer headDistance = Math.abs(head.data - data);
         Integer tailDistance = Math.abs(tail.data - data);
@@ -190,15 +194,17 @@ public class Doubly_Linked_List {
         // check of data in head of tail zit
         if (headDistance == 0 || tailDistance == 0) {
             System.out.println("Gevonden!");
+            return true;
             // check of
         } else if (head.data < data || tail.data > data) {
             System.out.println("Niet gevonden!");
+            return false;
         } else {
             if (headDistance > tailDistance) {
                 System.out.println("vanaf head");
-                simpleSearch(data);
+                return simpleSearch(data);
             } else {
-                reverseSimpleSearch(data);
+                return reverseSimpleSearch(data);
             }
         }
     }

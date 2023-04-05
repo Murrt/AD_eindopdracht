@@ -24,7 +24,7 @@ import LL.Linked_List;
 import DLL.Doubly_Linked_List;
 
 public class gui implements ActionListener {
-	private static TextField addValueTextField, searchValueTextField;
+	private static TextField addValueTextField;
 
 	String s1[] = { "Linked List", "Doubly Linked List" };
 
@@ -56,7 +56,6 @@ public class gui implements ActionListener {
 
 	// BT Search Field & Button
 	private static JTextField btSearchField = new JTextField(25);
-	private static Container btSearchFieldContainer = new Container();
 	private static JLabel btSearchFieldLabel = new JLabel();
 
 	private static JButton btSearchButton = new JButton("Search");
@@ -70,8 +69,6 @@ public class gui implements ActionListener {
 	// LL Buttons
 	private static JRadioButton simpleSortLL = new JRadioButton("Simple sort");
 	private static JRadioButton insertionSortLL = new JRadioButton("Insertion sort");
-	private static JRadioButton fastSearchLL = new JRadioButton("Fast search");
-	private static JRadioButton simpleSearchLL = new JRadioButton("Simple search");
 	private static JButton llSortButton = new JButton("ll Sort");
 	private static ButtonGroup llGroup = new ButtonGroup();
 
@@ -110,18 +107,12 @@ public class gui implements ActionListener {
 		// Linkedlist radio button group
 		pane.add(simpleSortLL);
 		pane.add(insertionSortLL);
-		pane.add(fastSearchLL);
-		pane.add(simpleSearchLL);
 
 		llGroup.add(simpleSortLL);
 		llGroup.add(insertionSortLL);
-		llGroup.add(fastSearchLL);
-		llGroup.add(simpleSearchLL);
 
 		simpleSortLL.setVisible(false);
 		insertionSortLL.setVisible(false);
-		fastSearchLL.setVisible(false);
-		simpleSearchLL.setVisible(false);
 
 		// Doubly Linkedlist radio button group
 		pane.add(simpleSortDLL);
@@ -140,7 +131,6 @@ public class gui implements ActionListener {
 		simpleSearchDLL.setVisible(false);
 
 		addValueTextField = new TextField("enter value");
-		searchValueTextField = new TextField("enter search value");
 
 		pane.add(btSortButton);
 		pane.add(llSortButton);
@@ -149,7 +139,6 @@ public class gui implements ActionListener {
 		pane.add(selectbox_text);
 		pane.add(result);
 		pane.add(addValueTextField);
-		pane.add(searchValueTextField);
 
 		pane.add(addValue);
 		pane.add(searchValue);
@@ -203,12 +192,6 @@ public class gui implements ActionListener {
 		// add value button
 		addValue.setBounds(25, 245, 120, 20);
 
-		// textfield
-		searchValueTextField.setBounds(25, 325, 150, 20);
-
-		// add value button
-		searchValue.setBounds(25, 345, 120, 20);
-
 		// datastructure result
 		datastructure_result.setBounds(300, 300, 400, 400);
 
@@ -225,13 +208,19 @@ public class gui implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				setInvis();
 
+				// search
 				btSearchField.setVisible(true);
 				btSearchButton.setVisible(true);
 				btSearchButton2.setVisible(true);
 				btSearchFieldLabel.setVisible(true);
+				// delete
 				btDeleteField.setVisible(true);
 				btDeleteButton.setVisible(true);
 				btDeleteFieldLabel.setVisible(true);
+
+				// add value
+				addValue.setVisible(true);
+				addValueTextField.setVisible(true);
 
 				if (rblinkedList.isSelected()) {
 					simpleSortLL.setVisible(true);
@@ -247,8 +236,8 @@ public class gui implements ActionListener {
 							} else if (insertionSortLL.isSelected()) {
 								sorted = linkedlist.insertionSort();
 								linkedlist = sorted;
-								String print = linkedlist.print_nodes();
-								System.out.println(print);
+								String res = linkedlist.print_nodes();
+								datastructure_result.setText(res);
 							}
 						}
 					});
@@ -322,8 +311,63 @@ public class gui implements ActionListener {
 							} else if (insertionSortDLL.isSelected()) {
 								sorted_2 = dlinkedlist.insertionSort();
 								dlinkedlist = sorted_2;
-								String print = dlinkedlist.print_nodes();
-								datastructure_result.setText(print);
+								String res = dlinkedlist.print_nodes();
+								datastructure_result.setText(res);
+							}
+						}
+					});
+
+					btSearchButton.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							String value = btSearchField.getText();
+							int value_int = Integer.parseInt(value);
+							Boolean res;
+							try {
+								res = dlinkedlist.simpleSearch(value_int);
+								if (res) {
+									datastructure_result.setText("Gevonden!");
+								} else {
+									datastructure_result.setText("Niet Gevonden");
+									System.out.println("niet gevonden");
+								}
+							} catch (Exception e1) {
+								e1.printStackTrace();
+								System.out.println();
+							}
+						}
+					});
+
+					btSearchButton2.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							String value = btSearchField.getText();
+							int value_int = Integer.parseInt(value);
+							Boolean res;
+							try {
+								res = dlinkedlist.fastSearch(value_int);
+								if (res) {
+									datastructure_result.setText("Gevonden!");
+								} else {
+									datastructure_result.setText("Niet Gevonden");
+									System.out.println("niet gevonden");
+								}
+							} catch (Exception e1) {
+								e1.printStackTrace();
+								System.out.println();
+							}
+						}
+					});
+
+					btDeleteButton.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							String value = btDeleteField.getText();
+							int value_int = Integer.parseInt(value);
+							try {
+								dlinkedlist.remove(value_int);
+								dlinkedlist.print_nodes();
+								String res = dlinkedlist.print_nodes();
+								datastructure_result.setText(res);
+							} catch (Exception e1) {
+								e1.printStackTrace();
 							}
 						}
 					});
@@ -406,14 +450,26 @@ public class gui implements ActionListener {
 	}
 
 	private static void setInvis() {
+		// Add field
+		addValue.setVisible(false);
+		addValueTextField.setVisible(false);
+
+		// LL
 		simpleSortLL.setVisible(false);
 		insertionSortLL.setVisible(false);
+		llSortButton.setVisible(false);
+		// BT
 		preOT.setVisible(false);
 		inOT.setVisible(false);
 		postOT.setVisible(false);
 		btSortButton.setVisible(false);
-		llSortButton.setVisible(false);
+
+		// DLL
 		dllSortButton.setVisible(false);
+		simpleSortDLL.setVisible(false);
+		insertionSortDLL.setVisible(false);
+
+		// Search/Delete field and buttons to the right
 		btSearchField.setVisible(false);
 		btSearchButton.setVisible(false);
 		btSearchButton2.setVisible(false);
