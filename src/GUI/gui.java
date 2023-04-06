@@ -130,7 +130,7 @@ public class gui implements ActionListener {
 		fastSearchDLL.setVisible(false);
 		simpleSearchDLL.setVisible(false);
 
-		addValueTextField = new TextField("enter value");
+		addValueTextField = new TextField("Number");
 
 		pane.add(btSortButton);
 		pane.add(llSortButton);
@@ -382,14 +382,17 @@ public class gui implements ActionListener {
 							if (preOT.isSelected()) {
 
 								binary_Tree.preOrderTraversal(binary_Tree.root);
+								datastructure_result.setText(binary_Tree.toStringPreorder(binary_Tree.root));
 
 							} else if (inOT.isSelected()) {
 
 								binary_Tree.inOrderTraversal(binary_Tree.root);
+								datastructure_result.setText(binary_Tree.toStringInorder(binary_Tree.root));
 
 							} else if (postOT.isSelected()) {
 
 								binary_Tree.postOrderTraversal(binary_Tree.root);
+								datastructure_result.setText(binary_Tree.toStringPostOrder(binary_Tree.root));
 
 							}
 						}
@@ -399,7 +402,7 @@ public class gui implements ActionListener {
 							String value = btSearchField.getText();
 							int value_int = Integer.parseInt(value);
 
-							binary_Tree.findNode(value_int);
+							datastructure_result.setText(binary_Tree.findNode(value_int));
 						}
 					});
 

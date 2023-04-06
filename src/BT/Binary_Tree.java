@@ -1,23 +1,12 @@
 package BT;
 
+import java.util.Arrays;
+
+import javax.swing.tree.TreeNode;
+
 public class Binary_Tree {
 
     public Node root;
-
-    public String print_nodes() {
-        List<String> strings = new LinkedList<>();
-        ListNode node = head;
-        // loop door alle nodes
-        for (int i = 1; i <= nodeCount; i++) {
-            System.out.println(node.data);
-            strings.add(Integer.toString(node.data));
-            node = node.next;
-        }
-
-        String message = String.join(",", strings);
-        return message;
-    }
-
 
     public void addNode(int key) {
 
@@ -53,6 +42,26 @@ public class Binary_Tree {
         }
     }
 
+    public void preOrderTraversal(Node focusNode) {
+        if (focusNode != null) {
+            System.out.println(focusNode);
+            preOrderTraversal(focusNode.leftChild);
+            preOrderTraversal(focusNode.rightChild);
+        }
+    }
+
+    public String toStringPreorder(Node focusNode) {
+        String s = "";
+        if (focusNode == null) {
+            return "";
+        }
+
+        s += focusNode.toString();
+        s += toStringPreorder(focusNode.leftChild);
+        s += toStringPreorder(focusNode.rightChild);
+        return s;
+    }
+
     public void inOrderTraversal(Node focusNode) {
         if (focusNode != null) {
             inOrderTraversal(focusNode.leftChild);
@@ -61,12 +70,16 @@ public class Binary_Tree {
         }
     }
 
-    public void preOrderTraversal(Node focusNode) {
-        if (focusNode != null) {
-            System.out.println(focusNode);
-            preOrderTraversal(focusNode.leftChild);
-            preOrderTraversal(focusNode.rightChild);
+    public String toStringInorder(Node focusNode) {
+        String s = "";
+        if (focusNode == null) {
+            return "";
         }
+
+        s += toStringInorder(focusNode.leftChild);
+        s += focusNode.toString();
+        s += toStringInorder(focusNode.rightChild);
+        return s;
     }
 
     public void postOrderTraversal(Node focusNode) {
@@ -77,7 +90,19 @@ public class Binary_Tree {
         }
     }
 
-    public Node findNode(int key) {
+    public String toStringPostOrder(Node focusNode) {
+        String result = "";
+        if (focusNode == null) {
+            return "";
+        }
+
+        result += toStringPostOrder(focusNode.leftChild);
+        result += toStringPostOrder(focusNode.rightChild);
+        result += focusNode.toString();
+        return result;
+    }
+
+    public String findNode(int key) {
 
         Node focusNode = root;
 
@@ -88,11 +113,12 @@ public class Binary_Tree {
                 focusNode = focusNode.rightChild;
             }
             if (focusNode == null) {
+                System.out.println("Node niet gevonden.");
                 return null;
             }
         }
-        System.out.println(focusNode);
-        return focusNode;
+        System.out.println("Node gevonden.");
+        return focusNode.toString();
     }
 
     public boolean removeNode(int key) {
@@ -102,102 +128,95 @@ public class Binary_Tree {
         boolean isLeftChild = true;
 
         while (focusNode.key != key) {
-
             parent = focusNode;
-
             if (key < focusNode.key) {
-
                 isLeftChild = true;
-
                 focusNode = focusNode.leftChild;
-
             } else {
-
                 isLeftChild = false;
                 focusNode = focusNode.rightChild;
-
             }
             // Focus Node kan niet gevonden worden.
             if (focusNode == null) {
-
                 System.out.println("FocusNode kon niet gevonden worden.");
                 return false;
-
             }
-            // Focus Node heeft geen children.
-            if (focusNode.leftChild == null && focusNode.rightChild == null) {
+        }
+        // Focus Node heeft geen children.
+        if (focusNode.leftChild == null && focusNode.rightChild == null) {
 
-                if (focusNode == root) {
+            if (focusNode == root) {
 
-                    root = null;
+                root = null;
 
-                } else if (isLeftChild) {
+            } else if (isLeftChild) {
 
-                    parent.leftChild = null;
+                parent.leftChild = null;
 
-                } else {
+            } else {
 
-                    parent.rightChild = null;
-
-                }
-            }
-            // Focus Node heeft geen right child.
-            else if (focusNode.rightChild == null) {
-
-                if (focusNode == root) {
-
-                    root = focusNode.leftChild;
-
-                } else if (isLeftChild) {
-
-                    parent.leftChild = focusNode.leftChild;
-
-                } else {
-
-                    parent.rightChild = focusNode.leftChild;
-
-                }
-            }
-            // Focus Node heeft geen left child.
-            else if (focusNode.leftChild == null) {
-
-                if (focusNode == root) {
-
-                    root = focusNode.rightChild;
-
-                } else if (isLeftChild) {
-
-                    parent.leftChild = focusNode.rightChild;
-
-                } else {
-
-                    parent.rightChild = parent.leftChild;
-
-                }
-            }
-            // Focus Node heeft twee children
-            else {
-
-                Node replacement = getReplacementNode(focusNode);
-
-                if (focusNode == root) {
-
-                    root = replacement;
-
-                } else if (isLeftChild) {
-
-                    parent.leftChild = replacement;
-
-                } else {
-
-                    parent.rightChild = replacement;
-
-                }
-
-                replacement.leftChild = focusNode.leftChild;
+                parent.rightChild = null;
 
             }
         }
+        // Focus Node heeft geen right child.
+        else if (focusNode.rightChild == null) {
+
+            if (focusNode == root) {
+
+                root = focusNode.leftChild;
+
+            } else if (isLeftChild) {
+
+                parent.leftChild = focusNode.leftChild;
+
+            } else {
+
+                parent.rightChild = focusNode.leftChild;
+
+            }
+        }
+        // Focus Node heeft geen left child.
+        else if (focusNode.leftChild == null) {
+
+            if (focusNode == root) {
+
+                root = focusNode.rightChild;
+
+            } else if (isLeftChild) {
+
+                parent.leftChild = focusNode.rightChild;
+
+            } else {
+
+                parent.rightChild = parent.leftChild;
+
+            }
+        }
+        // Focus Node heeft twee children
+        else {
+
+            Node replacement = getReplacementNode(focusNode);
+
+            if (focusNode == root) {
+
+                root = replacement;
+
+            } else if (isLeftChild) {
+
+                parent.leftChild = replacement;
+
+            } else {
+
+                parent.rightChild = replacement;
+
+            }
+
+            replacement.leftChild = focusNode.leftChild;
+
+        }
+
+        System.out.println("Node verwijderd.");
         return true;
     }
 
