@@ -333,17 +333,17 @@ public class gui implements ActionListener {
 							String value = btSearchField.getText();
 							int value_int = Integer.parseInt(value);
 							Boolean res;
-							Integer time;
+							long time;
 							try {
 								Object[] ret = dlinkedlist.simpleSearch(value_int);
 								res = (Boolean) ret[0];
-								time = (Integer) ret[1];
+								time = (long) ret[1];
 								if (res) {
 									datastructure_result.setText("Gevonden!");
-									datastructure_time.setText("Time: " + Integer.toString(time));
+									datastructure_time.setText("Time: " + time);
 								} else {
 									datastructure_result.setText("Niet Gevonden");
-									datastructure_time.setText("Time: " + Integer.toString(time));
+									datastructure_time.setText("Time: " + time);
 									System.out.println("niet gevonden");
 								}
 							} catch (Exception e1) {

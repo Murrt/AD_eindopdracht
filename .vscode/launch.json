@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Doubly_Linked_List",
+            "request": "launch",
+            "mainClass": "DLL.Doubly_Linked_List",
+            "projectName": "AD_eindopdracht_2a7304f0"
+        },
+        {
+            "type": "java",
             "name": "main",
             "request": "launch",
             "mainClass": "DLL.main",

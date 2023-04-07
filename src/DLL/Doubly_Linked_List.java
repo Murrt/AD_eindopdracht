@@ -1,5 +1,6 @@
 package DLL;
 
+import java.sql.Time;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -141,6 +142,7 @@ public class Doubly_Linked_List {
 
     public Object[] simpleSearch(Integer data) throws Exception {
         Boolean ret = false;
+        long startTime = System.currentTimeMillis();
         // check of lijst niet leeg is
         if (head != null) {
             // loop door lijst vanaf head op match met data
@@ -156,8 +158,10 @@ public class Doubly_Linked_List {
         } else {
             throw new Exception("Doubly linked list heeft geen head");
         }
-
-        return new Object[] { ret, 123 };
+        long endTime = System.currentTimeMillis();
+        long time = endTime - startTime;
+        // return ret;
+        return new Object[] { ret, time};
     }
 
     public Object[] reverseSimpleSearch(Integer data) throws Exception {
