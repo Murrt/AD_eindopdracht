@@ -431,7 +431,8 @@ public class gui implements ActionListener {
 								long endTime = System.currentTimeMillis();
 								long elapsedTime = endTime - startTime;
 
-								datastructure_result.setText(binary_Tree.toStringPreorder(binary_Tree.root) + " Time completion in: " + elapsedTime + " miliseconds.");
+								datastructure_result.setText(binary_Tree.toStringPreorder(binary_Tree.root));
+								datastructure_time.setText(" Time completion in: " + elapsedTime + " miliseconds.");
 
 							} else if (inOT.isSelected()) {
 								long startTime = System.currentTimeMillis();
@@ -441,7 +442,8 @@ public class gui implements ActionListener {
 								long endTime = System.currentTimeMillis();
 								long elapsedTime = endTime - startTime;
 
-								datastructure_result.setText(binary_Tree.toStringInorder(binary_Tree.root) + " Time completion in: " + elapsedTime + " miliseconds.");
+								datastructure_result.setText(binary_Tree.toStringInorder(binary_Tree.root));
+								datastructure_time.setText(" Time completion in: " + elapsedTime + " miliseconds.");
 
 							} else if (postOT.isSelected()) {
 								long startTime = System.currentTimeMillis();
@@ -451,27 +453,45 @@ public class gui implements ActionListener {
 								long endTime = System.currentTimeMillis();
 								long elapsedTime = endTime - startTime;
 
-								datastructure_result.setText(binary_Tree.toStringPostOrder(binary_Tree.root) + " Time completion in: " + elapsedTime + " miliseconds.");
-
+								datastructure_result.setText(binary_Tree.toStringPostOrder(binary_Tree.root));
+								datastructure_time.setText(" Time completion in: " + elapsedTime + " miliseconds.");
 							}
 						}
 					});
 					btSearchButton.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
+
+							long startTime = System.currentTimeMillis();
+
 							String value = btSearchField.getText();
 							int value_int = Integer.parseInt(value);
-							
+
 							binary_Tree.findNode(value_int);
+
+							long endTime = System.currentTimeMillis();
+							long elapsedTime = endTime - startTime;
+
 							datastructure_result.setText(binary_Tree.findNode(value_int));
+							datastructure_time.setText(" Time completion in: " + elapsedTime + " miliseconds.");
+
 						}
 					});
 
 					btDeleteButton.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
+
+							long startTime = System.currentTimeMillis();
+
 							String value = btDeleteField.getText();
 							int value_int = Integer.parseInt(value);
+							
+							long endTime = System.currentTimeMillis();
+							long elapsedTime = endTime - startTime;
+
 
 							datastructure_result.setText(binary_Tree.removeNode(value_int));
+							datastructure_time.setText(" Time completion in: " + elapsedTime + " miliseconds.");
+
 						}
 					});
 				}
