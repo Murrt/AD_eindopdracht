@@ -8,9 +8,12 @@ public class Binary_Tree {
 
         Node newNode = new Node(key);
 
+        // Check of key de root is
         if (root == null) {
             root = newNode;
         } else {
+
+            // Kijk vanaf de root als je de tree gaat traversen.
             Node focusNode = root;
 
             Node parent;
@@ -105,7 +108,6 @@ public class Binary_Tree {
 
     public String findNode(int key) {
 
-        long startTime = System.currentTimeMillis();
         Node focusNode = root;
 
         while (focusNode.key != key) {
@@ -120,15 +122,10 @@ public class Binary_Tree {
             }
         }
         System.out.println("Node gevonden.");
-        long endTime = System.currentTimeMillis();
-        long elapsedTime = endTime - startTime;
-        System.out.println(elapsedTime);
-        return focusNode.toString() + " Time completion in: " + elapsedTime + " miliseconds.";
+        return focusNode.toString() + " gevonden.";
     }
 
     public String removeNode(int key) {
-        long startTime = System.currentTimeMillis();
-
         Node focusNode = root;
         Node parent = root;
 
@@ -224,10 +221,7 @@ public class Binary_Tree {
         }
 
         System.out.println("Node verwijderd.");
-
-        long endTime = System.currentTimeMillis();
-        long elapsedTime = endTime - startTime;
-        return "Node verwijderd. Time completion in: " + elapsedTime + " miliseconds.";
+        return focusNode + " verwijderd.";
     }
 
     public Node getReplacementNode(Node replacedNode) {
