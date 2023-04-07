@@ -408,19 +408,34 @@ public class gui implements ActionListener {
 					btSortButton.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							if (preOT.isSelected()) {
+								long startTime = System.currentTimeMillis();
 
 								binary_Tree.preOrderTraversal(binary_Tree.root);
-								datastructure_result.setText(binary_Tree.toStringPreorder(binary_Tree.root));
+
+								long endTime = System.currentTimeMillis();
+								long elapsedTime = endTime - startTime;
+
+								datastructure_result.setText(binary_Tree.toStringPreorder(binary_Tree.root) + " Time completion in: " + elapsedTime + " miliseconds.");
 
 							} else if (inOT.isSelected()) {
+								long startTime = System.currentTimeMillis();
 
 								binary_Tree.inOrderTraversal(binary_Tree.root);
-								datastructure_result.setText(binary_Tree.toStringInorder(binary_Tree.root));
+
+								long endTime = System.currentTimeMillis();
+								long elapsedTime = endTime - startTime;
+
+								datastructure_result.setText(binary_Tree.toStringInorder(binary_Tree.root) + " Time completion in: " + elapsedTime + " miliseconds.");
 
 							} else if (postOT.isSelected()) {
+								long startTime = System.currentTimeMillis();
 
 								binary_Tree.postOrderTraversal(binary_Tree.root);
-								datastructure_result.setText(binary_Tree.toStringPostOrder(binary_Tree.root));
+
+								long endTime = System.currentTimeMillis();
+								long elapsedTime = endTime - startTime;
+
+								datastructure_result.setText(binary_Tree.toStringPostOrder(binary_Tree.root) + " Time completion in: " + elapsedTime + " miliseconds.");
 
 							}
 						}

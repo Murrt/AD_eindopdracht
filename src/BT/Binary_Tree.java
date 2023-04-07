@@ -47,8 +47,6 @@ public class Binary_Tree {
     }
 
     public String toStringPreorder(Node focusNode) {
-        long startTime = System.currentTimeMillis();
-
         String s = "";
         if (focusNode == null) {
             return "";
@@ -58,9 +56,8 @@ public class Binary_Tree {
         s += toStringPreorder(focusNode.leftChild);
         s += toStringPreorder(focusNode.rightChild);
 
-        long endTime = System.currentTimeMillis();
-        long elapsedTime = endTime - startTime;
-        return s + " Time completion in: " + elapsedTime + " miliseconds.";
+
+        return s;
     }
 
     public void inOrderTraversal(Node focusNode) {
@@ -72,7 +69,6 @@ public class Binary_Tree {
     }
 
     public String toStringInorder(Node focusNode) {
-        long startTime = System.currentTimeMillis();
 
         String s = "";
         if (focusNode == null) {
@@ -83,9 +79,7 @@ public class Binary_Tree {
         s += focusNode.toString();
         s += toStringInorder(focusNode.rightChild);
 
-        long endTime = System.currentTimeMillis();
-        long elapsedTime = endTime - startTime;
-        return s + " Time completion in: " + elapsedTime + " miliseconds.";
+        return s;
     }
 
     public void postOrderTraversal(Node focusNode) {
@@ -97,7 +91,6 @@ public class Binary_Tree {
     }
 
     public String toStringPostOrder(Node focusNode) {
-        long startTime = System.currentTimeMillis();
 
         String result = "";
         if (focusNode == null) {
@@ -107,9 +100,7 @@ public class Binary_Tree {
             result += toStringPostOrder(focusNode.rightChild);
             result += focusNode.toString(); 
         }
-        long endTime = System.currentTimeMillis();
-        long elapsedTime = endTime - startTime;
-        return result + " Time completion in: " + elapsedTime + " miliseconds.";
+        return result;
     }
 
     public String findNode(int key) {
