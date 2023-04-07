@@ -8,9 +8,12 @@ public class Binary_Tree {
 
         Node newNode = new Node(key);
 
+        // Check of key de root is
         if (root == null) {
             root = newNode;
         } else {
+
+            // Kijk vanaf de root als je de tree gaat traversen.
             Node focusNode = root;
 
             Node parent;
