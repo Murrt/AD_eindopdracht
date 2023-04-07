@@ -6,7 +6,11 @@ public class Node {
     Node leftChild;
     Node rightChild;
 
-    Node (int key) {
+    Node(int key) {
         this.key = key;
+    }
+
+    public String toString() {
+        return " " + key;
     }
 }
