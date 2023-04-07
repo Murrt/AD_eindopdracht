@@ -316,14 +316,18 @@ public class gui implements ActionListener {
 					dllSortButton.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							if (simpleSortDLL.isSelected()) {
-								dlinkedlist.simpleSort();
+								long time = dlinkedlist.simpleSort();
 								String res = dlinkedlist.print_nodes();
 								datastructure_result.setText(res);
+								datastructure_time.setText("Time: " + (time));
 							} else if (insertionSortDLL.isSelected()) {
-								sorted_2 = dlinkedlist.insertionSort();
+								Object[] ret = dlinkedlist.insertionSort();
+								sorted_2 = (Doubly_Linked_List) ret[0];
+								long time = (long) ret[1];
 								dlinkedlist = sorted_2;
 								String res = dlinkedlist.print_nodes();
 								datastructure_result.setText(res);
+								datastructure_time.setText("Time: " + (time) + "ms");
 							}
 						}
 					});
@@ -338,12 +342,13 @@ public class gui implements ActionListener {
 								Object[] ret = dlinkedlist.simpleSearch(value_int);
 								res = (Boolean) ret[0];
 								time = (long) ret[1];
+
 								if (res) {
 									datastructure_result.setText("Gevonden!");
-									datastructure_time.setText("Time: " + time);
+									datastructure_time.setText("Time: " + (time));
 								} else {
 									datastructure_result.setText("Niet Gevonden");
-									datastructure_time.setText("Time: " + time);
+									datastructure_time.setText("Time: " + (time) + "ms");
 									System.out.println("niet gevonden");
 								}
 							} catch (Exception e1) {
@@ -358,15 +363,18 @@ public class gui implements ActionListener {
 							String value = btSearchField.getText();
 							int value_int = Integer.parseInt(value);
 							Boolean res;
-							Integer time;
+							long time;
 							try {
-								Object[] ret = dlinkedlist.simpleSearch(value_int);
+								Object[] ret = dlinkedlist.fastSearch(value_int);
 								res = (Boolean) ret[0];
-								time = (Integer) ret[1];
+								time = (long) ret[1];
+
 								if (res) {
 									datastructure_result.setText("Gevonden!");
+									datastructure_time.setText("Time: " + (time) + "ms");
 								} else {
 									datastructure_result.setText("Niet Gevonden");
+									datastructure_time.setText("Time: " + (time) + "ms");
 									System.out.println("niet gevonden");
 								}
 							} catch (Exception e1) {
@@ -381,10 +389,11 @@ public class gui implements ActionListener {
 							String value = btDeleteField.getText();
 							int value_int = Integer.parseInt(value);
 							try {
-								dlinkedlist.remove(value_int);
+								long time = dlinkedlist.remove(value_int);
 								dlinkedlist.print_nodes();
 								String res = dlinkedlist.print_nodes();
 								datastructure_result.setText(res);
+								datastructure_time.setText("Time: " + (time) + "ms");
 							} catch (Exception e1) {
 								e1.printStackTrace();
 							}

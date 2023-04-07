@@ -12,7 +12,7 @@ public class main {
         dlinkedlist.add(3);
         dlinkedlist.add(4);
 
-        Doubly_Linked_List sorted = dlinkedlist.insertionSort();
+        // Doubly_Linked_List sorted = dlinkedlist.insertionSort();
         
         sorted.print_nodes();
 

@@ -3,6 +3,9 @@ package DLL;
 import java.sql.Time;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import javax.swing.text.html.StyleSheet;
 
 public class Doubly_Linked_List {
 
@@ -14,12 +17,16 @@ public class Doubly_Linked_List {
 
     }
 
-    public void remove(Integer index) throws Exception {
-        if (index < 0 || index > nodeCount) {
+    public long remove(Integer index) throws Exception {
+        long startTime = System.nanoTime();
+
+        if (index < 0 || index > nodeCount - 1) {
             throw new Exception("Ongeldige index aangeleverd");
         }
-
-        if (index == nodeCount) {
+        if (index == 0 && nodeCount == 1) {
+            head = null;
+            tail = null;
+        } else if (index == nodeCount) {
             tail = tail.prev;
         } else if (index == 1) {
             head = head.next;
@@ -39,6 +46,12 @@ public class Doubly_Linked_List {
             next_node.next = prev_node;
         }
         nodeCount--;
+
+        long endTime = System.nanoTime();
+        long time = (startTime - endTime) / 100000;
+
+        return time;
+
     }
 
     public String print_nodes() {
@@ -52,8 +65,9 @@ public class Doubly_Linked_List {
             node = node.next;
         }
 
-        System.out.println(node.data);
-        strings.add(Integer.toString(node.data));
+        if (node != null) {
+            strings.add(Integer.toString(node.data));
+        }
 
         String message = String.join(",", strings);
         return message;
@@ -68,29 +82,29 @@ public class Doubly_Linked_List {
             tail = node;
         }
 
-        // Make next of new node as head and previous as null /
+        // Make next of new node as head and previous as null
         node.next = head;
         node.prev = null;
 
-        // change prev of head node to new node /
+        // change prev of head node to new node
         if (head != null) {
             head.prev = node;
         }
 
-        // move the head to point to the new node /
+        // move the head to point to the new node
         head = node;
 
         nodeCount++;
     }
 
-    public Doubly_Linked_List insertionSort() {
+    public Object[] insertionSort() {
 
         Doubly_Linked_List sorted = new Doubly_Linked_List();
         Doubly_ListNode current = head;
+        long startTime = System.nanoTime();
 
         while (current != null) {
             Doubly_ListNode next = current.next;
-            // current.prev = current.next = null;
             sorted = sortedInsert(sorted, current);
             current = next;
         }
@@ -102,10 +116,13 @@ public class Doubly_Linked_List {
             Doubly_ListNode pointer = current_2.next;
             current_2 = pointer;
         }
-        sorted.tail = current_2; // !!!
+        sorted.tail = current_2;
         sorted.tail.next = null;
+        long endTime = System.nanoTime();
+        long time = (endTime - startTime) / 1000000;
 
-        return sorted;
+        return new Object[] { sorted, time };
+
     }
 
     static Doubly_Linked_List sortedInsert(Doubly_Linked_List sorted, Doubly_ListNode newNode) {
@@ -138,11 +155,12 @@ public class Doubly_Linked_List {
 
         sorted.nodeCount++;
         return sorted;
+
     }
 
     public Object[] simpleSearch(Integer data) throws Exception {
         Boolean ret = false;
-        long startTime = System.currentTimeMillis();
+        long startTime = System.nanoTime();
         // check of lijst niet leeg is
         if (head != null) {
             // loop door lijst vanaf head op match met data
@@ -158,14 +176,19 @@ public class Doubly_Linked_List {
         } else {
             throw new Exception("Doubly linked list heeft geen head");
         }
-        long endTime = System.currentTimeMillis();
-        long time = endTime - startTime;
-        // return ret;
-        return new Object[] { ret, time};
+
+        // TimeUnit.SECONDS.sleep(1);
+
+        long endTime = System.nanoTime();
+        long time = (endTime - startTime) / 1000000;
+
+        return new Object[] { ret, time };
     }
 
     public Object[] reverseSimpleSearch(Integer data) throws Exception {
         Boolean ret = false;
+        long startTime = System.nanoTime();
+
         // check of lijst niet leeg is
         if (tail != null) {
             // loop door lijst vanaf head op match met data
@@ -182,15 +205,18 @@ public class Doubly_Linked_List {
             throw new Exception("Doubly linked list heeft geen head");
         }
 
-        // return ret;
-        return new Object[] { ret, 123 };
+        long endTime = System.nanoTime();
+        long time = (endTime - startTime) / 1000000;
+
+        return new Object[] { ret, time };
     }
 
     public Object[] fastSearch(Integer data) throws Exception {
         // werkt alleen op gesorteerde lijst!
         Integer headDistance = Math.abs(head.data - data);
         Integer tailDistance = Math.abs(tail.data - data);
-        Integer time = 0;
+        long startTime = System.nanoTime();
+
         Boolean res = false;
 
         // check of data in head of tail zit
@@ -206,24 +232,28 @@ public class Doubly_Linked_List {
                 System.out.println("vanaf head");
                 Object[] ss = simpleSearch(data);
                 res = (Boolean) ss[0];
-                time += (Integer) ss[1];
+                startTime += (long) ss[1];
             } else {
 
                 System.out.println("vanaf head");
                 Object[] ss = reverseSimpleSearch(data);
                 res = (Boolean) ss[0];
-                time += (Integer) ss[1];
+                startTime += (long) ss[1];
             }
         }
 
-        return new Object[] { res, 123 };
+        long endTime = System.nanoTime();
+        long time = (endTime - startTime) / 1000000;
+
+        return new Object[] { res, time };
     }
 
-    public void simpleSort() {
+    public long simpleSort() {
+        long startTime = System.nanoTime();
         Doubly_ListNode current = null, index = null;
         int data;
         if (head == null) {
-            return;
+            return 0;
         } else {
             for (current = head; current.next != null; current = current.next) {
                 for (index = current.next; index != null; index = index.next) {
@@ -235,5 +265,9 @@ public class Doubly_Linked_List {
                 }
             }
         }
+
+        long endTime = System.nanoTime();
+        long time = (endTime - startTime) / 1000000;
+        return time;
     }
 }
