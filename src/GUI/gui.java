@@ -47,6 +47,11 @@ public class gui implements ActionListener {
 	private static JButton sort_2 = new JButton("sort 2");
 	private static JLabel datastructure_result = new JLabel();
 
+
+	// Sorting time completion label
+	private static JLabel sortingTime_result = new JLabel();
+
+
 	// BT Tree Traversel Buttons
 	private static JRadioButton preOT = new JRadioButton("Pre Order Traversel");
 	private static JRadioButton inOT = new JRadioButton("In Order Traversel");
@@ -146,6 +151,8 @@ public class gui implements ActionListener {
 		pane.add(sort_2);
 		pane.add(datastructure_result);
 
+		pane.add(sortingTime_result);
+
 		// Tree Traversel Radio Buttons
 		pane.add(preOT);
 		pane.add(inOT);
@@ -195,6 +202,8 @@ public class gui implements ActionListener {
 		// datastructure result
 		datastructure_result.setBounds(300, 300, 400, 400);
 
+		sortingTime_result.setBounds(350, 300, 400, 400);
+
 		// Binary Tree Sort button
 		btSortButton.setBounds(500, 125, 100, 20);
 
@@ -211,7 +220,7 @@ public class gui implements ActionListener {
 				// search
 				btSearchField.setVisible(true);
 				btSearchButton.setVisible(true);
-				btSearchButton2.setVisible(true);
+				
 				btSearchFieldLabel.setVisible(true);
 				// delete
 				btDeleteField.setVisible(true);
@@ -226,6 +235,7 @@ public class gui implements ActionListener {
 					simpleSortLL.setVisible(true);
 					insertionSortLL.setVisible(true);
 					llSortButton.setVisible(true);
+					btSearchButton2.setVisible(true);
 
 					llSortButton.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
@@ -301,6 +311,7 @@ public class gui implements ActionListener {
 					simpleSortDLL.setVisible(true);
 					insertionSortDLL.setVisible(true);
 					dllSortButton.setVisible(true);
+					btSearchButton2.setVisible(true);
 
 					dllSortButton.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
