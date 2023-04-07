@@ -104,6 +104,7 @@ public class Binary_Tree {
 
     public String findNode(int key) {
 
+        long startTime = System.currentTimeMillis();
         Node focusNode = root;
 
         while (focusNode.key != key) {
@@ -118,7 +119,10 @@ public class Binary_Tree {
             }
         }
         System.out.println("Node gevonden.");
-        return focusNode.toString();
+        long endTime = System.currentTimeMillis();
+        long elapsedTime = endTime - startTime;
+        System.out.println(elapsedTime);
+        return focusNode.toString() + " Time completion: " + elapsedTime;
     }
 
     public boolean removeNode(int key) {

@@ -48,6 +48,11 @@ public class gui implements ActionListener {
 	private static JLabel datastructure_result = new JLabel();
 	private static JLabel datastructure_time = new JLabel();
 
+
+	// Sorting time completion label
+	private static JLabel sortingTime_result = new JLabel();
+
+
 	// BT Tree Traversel Buttons
 	private static JRadioButton preOT = new JRadioButton("Pre Order Traversel");
 	private static JRadioButton inOT = new JRadioButton("In Order Traversel");
@@ -57,7 +62,7 @@ public class gui implements ActionListener {
 
 	// BT Search Field & Button
 	private static JTextField btSearchField = new JTextField(25);
-	private static JLabel btSearchFieldLabel = new JLabel();
+	private static JLabel btSearchFieldLabel = new JLabel("Search Node:");
 
 	private static JButton btSearchButton = new JButton("Search");
 	private static JButton btSearchButton2 = new JButton("Search2");
@@ -148,6 +153,8 @@ public class gui implements ActionListener {
 		pane.add(datastructure_result);
 		pane.add(datastructure_time);
 
+		pane.add(sortingTime_result);
+
 		// Tree Traversel Radio Buttons
 		pane.add(preOT);
 		pane.add(inOT);
@@ -168,7 +175,7 @@ public class gui implements ActionListener {
 		pane.add(btSearchButton2);
 
 		btSearchField.setBounds(825, 25, 100, 20);
-		btSearchFieldLabel.setBounds(700, 25, 200, 20);
+		btSearchFieldLabel.setBounds(725, 25, 200, 20);
 		btSearchButton.setBounds(825, 50, 100, 20);
 		btSearchButton2.setBounds(825, 75, 100, 20);
 
@@ -198,6 +205,8 @@ public class gui implements ActionListener {
 		datastructure_result.setBounds(300, 200, 200, 50);
 		datastructure_time.setBounds(300, 300, 200, 50);
 
+		sortingTime_result.setBounds(350, 300, 400, 400);
+
 		// Binary Tree Sort button
 		btSortButton.setBounds(500, 125, 100, 20);
 
@@ -214,7 +223,6 @@ public class gui implements ActionListener {
 				// search
 				btSearchField.setVisible(true);
 				btSearchButton.setVisible(true);
-				btSearchButton2.setVisible(true);
 				btSearchFieldLabel.setVisible(true);
 				// delete
 				btDeleteField.setVisible(true);
@@ -229,6 +237,7 @@ public class gui implements ActionListener {
 					simpleSortLL.setVisible(true);
 					insertionSortLL.setVisible(true);
 					llSortButton.setVisible(true);
+					btSearchButton2.setVisible(true);
 
 					llSortButton.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
@@ -304,6 +313,7 @@ public class gui implements ActionListener {
 					simpleSortDLL.setVisible(true);
 					insertionSortDLL.setVisible(true);
 					dllSortButton.setVisible(true);
+					btSearchButton2.setVisible(true);
 
 					dllSortButton.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
