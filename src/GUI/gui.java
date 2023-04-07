@@ -240,14 +240,18 @@ public class gui implements ActionListener {
 					llSortButton.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							if (simpleSortLL.isSelected()) {
-								linkedlist.simpleSort();
+								long time = linkedlist.simpleSort();
 								String res = linkedlist.print_nodes();
 								datastructure_result.setText(res);
+								datastructure_time.setText("Time: " + (time));
 							} else if (insertionSortLL.isSelected()) {
-								sorted = linkedlist.insertionSort();
+								Object[] ret = linkedlist.insertionSort();
+								sorted = (Linked_List) ret[0];
+								long time = (long) ret[1];
 								linkedlist = sorted;
 								String res = linkedlist.print_nodes();
 								datastructure_result.setText(res);
+								datastructure_time.setText("Time: " + (time) + "ms");
 							}
 						}
 					});
@@ -257,12 +261,18 @@ public class gui implements ActionListener {
 							String value = btSearchField.getText();
 							int value_int = Integer.parseInt(value);
 							Boolean res;
+							long time;
 							try {
-								res = linkedlist.simpleSearch(value_int);
+								Object[] ret = linkedlist.simpleSearch(value_int);
+								res = (Boolean) ret[0];
+								time = (long) ret[1];
+
 								if (res) {
 									datastructure_result.setText("Gevonden!");
+									datastructure_time.setText("Time: " + (time));
 								} else {
 									datastructure_result.setText("Niet Gevonden");
+									datastructure_time.setText("Time: " + (time) + "ms");
 									System.out.println("niet gevonden");
 								}
 							} catch (Exception e1) {
@@ -277,12 +287,18 @@ public class gui implements ActionListener {
 							String value = btSearchField.getText();
 							int value_int = Integer.parseInt(value);
 							Boolean res;
+							long time;
 							try {
-								res = linkedlist.fastSearch(value_int);
+								Object[] ret = linkedlist.fastSearch(value_int);
+								res = (Boolean) ret[0];
+								time = (long) ret[1];
+
 								if (res) {
 									datastructure_result.setText("Gevonden!");
+									datastructure_time.setText("Time: " + (time) + "ms");
 								} else {
 									datastructure_result.setText("Niet Gevonden");
+									datastructure_time.setText("Time: " + (time) + "ms");
 									System.out.println("niet gevonden");
 								}
 							} catch (Exception e1) {

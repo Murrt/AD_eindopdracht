@@ -13,7 +13,9 @@ public class Linked_List {
 
     }
 
-    public void remove(Integer index) throws Exception {
+    public long remove(Integer index) throws Exception {
+        long startTime = System.nanoTime();
+
         if (index < 0 || index > nodeCount) {
             System.out.println(nodeCount);
             throw new Exception("ongeldige index");
@@ -37,6 +39,10 @@ public class Linked_List {
             }
         }
         nodeCount--;
+        long endTime = System.nanoTime();
+        long time = (startTime - endTime) / 100000;
+
+        return time;
     }
 
     public String print_nodes() {
@@ -92,10 +98,11 @@ public class Linked_List {
         nodeCount++;
     }
 
-    public Linked_List insertionSort() {
+    public Object[] insertionSort() {
 
         Linked_List sorted = new Linked_List();
         ListNode current = head;
+        long startTime = System.nanoTime();
 
         while (current != null) {
             ListNode next = current.next;
@@ -114,7 +121,10 @@ public class Linked_List {
         sorted.tail = current_2; // !!!
         sorted.tail.next = null;
 
-        return sorted;
+        long endTime = System.nanoTime();
+        long time = (endTime - startTime) / 1000000;
+
+        return new Object[] { sorted, time };
     }
 
     static Linked_List sortedInsert(Linked_List sorted, ListNode newNode) {
@@ -146,17 +156,20 @@ public class Linked_List {
         return sorted;
     }
 
-    public Boolean simpleSearch(Integer data) throws Exception {
+    public Object[] simpleSearch(Integer data) throws Exception {
+        Boolean ret = false;
+        long startTime = System.nanoTime();
+
         // check of lijst niet leeg is
         if (head != null) {
             // loop door lijst vanaf head op match met data
             ListNode current = head;
             System.out.println("Gezocht: " + data);
 
-            for (int i = 1; i < nodeCount; i++) {
-                System.out.println("Gevonden: " + current.data);
+            for (int i = 0; i < nodeCount; i++) {
                 if (current.data == data) {
-                    return true;
+                    System.out.println("Gevonden: " + current.data);
+                    ret = true;
                 }
                 if (current.next != null) {
                     current = current.next;
@@ -165,27 +178,48 @@ public class Linked_List {
         } else {
             throw new Exception("Doubly linked list heeft geen head");
         }
-        return false;
+
+        long endTime = System.nanoTime();
+        long time = (endTime - startTime) / 1000000;
+
+        return new Object[] { ret, time };
     }
 
-    public Boolean fastSearch(Integer data) throws Exception {
-        // werkt alleen op gesorteerde lijst!
-        Integer headDistance = Math.abs(head.data - data);
-        Integer tailDistance = Math.abs(tail.data - data);
+    public Object[] fastSearch(Integer data) throws Exception {
 
-        // check of data in head of tail zit
-        if (headDistance == 0 || tailDistance == 0) {
-            return true;// check of
-        } else {
-            return simpleSearch(data);
+        Boolean ret = false;
+        long startTime = System.nanoTime();
+
+        if (nodeCount > 0) {
+            // werkt alleen op gesorteerde lijst!
+            Integer headDistance = Math.abs(head.data - data);
+            Integer tailDistance = Math.abs(tail.data - data);
+
+            // check of data in head of tail zit
+            if (headDistance == 0 || tailDistance == 0) {
+                ret = true;// check of
+            } else {
+                Object[] ss = simpleSearch(data);
+                ret = (Boolean) ss[0];
+                startTime += (long) ss[1];
+            }
+
+            long endTime = System.nanoTime();
+            long time = (endTime - startTime) / 1000000;
+
+            return new Object[] { ret, time };
         }
+
+        return new Object[] { ret, 0 };
     }
 
-    public void simpleSort() {
+    public long simpleSort() {
         ListNode current = null, index = null;
+        long startTime = System.nanoTime();
+
         int data;
         if (head == null) {
-            return;
+            return 0;
         } else {
             for (current = head; current.next != null; current = current.next) {
                 for (index = current.next; index != null; index = index.next) {
@@ -197,5 +231,10 @@ public class Linked_List {
                 }
             }
         }
+
+        long endTime = System.nanoTime();
+        long time = (endTime - startTime) / 1000000;
+
+        return time;
     }
 }

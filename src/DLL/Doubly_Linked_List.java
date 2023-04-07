@@ -159,30 +159,37 @@ public class Doubly_Linked_List {
     }
 
     public Object[] simpleSearch(Integer data) throws Exception {
+
         Boolean ret = false;
         long startTime = System.nanoTime();
-        // check of lijst niet leeg is
-        if (head != null) {
-            // loop door lijst vanaf head op match met data
-            Doubly_ListNode current = head;
-            for (int i = 1; i <= nodeCount; i++) {
-                if (current.data == data) {
-                    ret = true;
+
+        if (nodeCount > 0) {
+
+            // check of lijst niet leeg is
+            if (head != null) {
+                // loop door lijst vanaf head op match met data
+                Doubly_ListNode current = head;
+                for (int i = 0; i <= nodeCount; i++) {
+                    if (current.data == data) {
+                        ret = true;
+                    }
+                    if (current.next != null) {
+                        current = current.next;
+                    }
                 }
-                if (current.next != null) {
-                    current = current.next;
-                }
+            } else {
+                throw new Exception("Doubly linked list heeft geen head");
             }
-        } else {
-            throw new Exception("Doubly linked list heeft geen head");
+
+            // TimeUnit.SECONDS.sleep(1);
+
+            long endTime = System.nanoTime();
+            long time = (endTime - startTime) / 1000000;
+
+            return new Object[] { ret, time };
         }
+        return new Object[] { ret, 0 };
 
-        // TimeUnit.SECONDS.sleep(1);
-
-        long endTime = System.nanoTime();
-        long time = (endTime - startTime) / 1000000;
-
-        return new Object[] { ret, time };
     }
 
     public Object[] reverseSimpleSearch(Integer data) throws Exception {
