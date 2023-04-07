@@ -46,6 +46,7 @@ public class gui implements ActionListener {
 	private static JButton sort_1 = new JButton("sort 1");
 	private static JButton sort_2 = new JButton("sort 2");
 	private static JLabel datastructure_result = new JLabel();
+	private static JLabel datastructure_time = new JLabel();
 
 	// BT Tree Traversel Buttons
 	private static JRadioButton preOT = new JRadioButton("Pre Order Traversel");
@@ -145,6 +146,7 @@ public class gui implements ActionListener {
 		pane.add(sort_1);
 		pane.add(sort_2);
 		pane.add(datastructure_result);
+		pane.add(datastructure_time);
 
 		// Tree Traversel Radio Buttons
 		pane.add(preOT);
@@ -193,7 +195,8 @@ public class gui implements ActionListener {
 		addValue.setBounds(25, 245, 120, 20);
 
 		// datastructure result
-		datastructure_result.setBounds(300, 300, 400, 400);
+		datastructure_result.setBounds(300, 200, 200, 50);
+		datastructure_time.setBounds(300, 300, 200, 50);
 
 		// Binary Tree Sort button
 		btSortButton.setBounds(500, 125, 100, 20);
@@ -322,12 +325,17 @@ public class gui implements ActionListener {
 							String value = btSearchField.getText();
 							int value_int = Integer.parseInt(value);
 							Boolean res;
+							Integer time;
 							try {
-								res = dlinkedlist.simpleSearch(value_int);
+								Object[] ret = dlinkedlist.simpleSearch(value_int);
+								res = (Boolean) ret[0];
+								time = (Integer) ret[1];
 								if (res) {
 									datastructure_result.setText("Gevonden!");
+									datastructure_time.setText("Time: " + Integer.toString(time));
 								} else {
 									datastructure_result.setText("Niet Gevonden");
+									datastructure_time.setText("Time: " + Integer.toString(time));
 									System.out.println("niet gevonden");
 								}
 							} catch (Exception e1) {
@@ -342,8 +350,11 @@ public class gui implements ActionListener {
 							String value = btSearchField.getText();
 							int value_int = Integer.parseInt(value);
 							Boolean res;
+							Integer time;
 							try {
-								res = dlinkedlist.fastSearch(value_int);
+								Object[] ret = dlinkedlist.simpleSearch(value_int);
+								res = (Boolean) ret[0];
+								time = (Integer) ret[1];
 								if (res) {
 									datastructure_result.setText("Gevonden!");
 								} else {

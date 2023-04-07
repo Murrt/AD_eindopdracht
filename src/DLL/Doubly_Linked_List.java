@@ -43,7 +43,7 @@ public class Doubly_Linked_List {
     public String print_nodes() {
         List<String> strings = new LinkedList<>();
         Doubly_ListNode node = head;
-        
+
         // loop door alle nodes
         for (int i = 1; i < nodeCount; i++) {
             System.out.println(node.data);
@@ -139,14 +139,15 @@ public class Doubly_Linked_List {
         return sorted;
     }
 
-    public Boolean simpleSearch(Integer data) throws Exception {
+    public Object[] simpleSearch(Integer data) throws Exception {
+        Boolean ret = null;
         // check of lijst niet leeg is
         if (head != null) {
             // loop door lijst vanaf head op match met data
             Doubly_ListNode current = head;
             for (int i = 1; i < nodeCount; i++) {
                 if (current.data == data) {
-                    return true;
+                    ret = true;
                 }
                 if (current.next != null) {
                     current = current.next;
@@ -155,54 +156,66 @@ public class Doubly_Linked_List {
         } else {
             throw new Exception("Doubly linked list heeft geen head");
         }
-        return false;
+        ret = false;
+
+        // return ret;
+        return new Object[] { ret, 123 };
     }
 
-    public Boolean reverseSimpleSearch(Integer data) throws Exception {
+    public Object[] reverseSimpleSearch(Integer data) throws Exception {
+        Boolean ret = null;
+        // check of lijst niet leeg is
         if (tail != null) {
+            // loop door lijst vanaf head op match met data
             Doubly_ListNode current = tail;
             while (current.prev != null) {
                 if (current.data == data) {
-                    System.out.println("Gevonden!");
-                    return true;
+                    ret = true;
                 }
                 if (current.prev != null) {
                     current = current.prev;
                 }
             }
-            // bovenstaande loop skipt head
-            if (head.data == data) {
-                System.out.println("Gevonden!");
-                return true;
-            }
         } else {
-            throw new Exception("Doubly linked list heeft geen tail");
+            throw new Exception("Doubly linked list heeft geen head");
         }
+        ret = false;
 
-        return false;
+        // return ret;
+        return new Object[] { ret, 123 };
     }
 
-    public Boolean fastSearch(Integer data) throws Exception {
+    public Object[] fastSearch(Integer data) throws Exception {
         // werkt alleen op gesorteerde lijst!
         Integer headDistance = Math.abs(head.data - data);
         Integer tailDistance = Math.abs(tail.data - data);
+        Integer time = 0;
+        Boolean res = false;
 
         // check of data in head of tail zit
         if (headDistance == 0 || tailDistance == 0) {
             System.out.println("Gevonden!");
-            return true;
+            res = true;
             // check of
         } else if (head.data < data || tail.data > data) {
             System.out.println("Niet gevonden!");
-            return false;
+            res = false;
         } else {
             if (headDistance > tailDistance) {
                 System.out.println("vanaf head");
-                return simpleSearch(data);
+                Object[] ss = simpleSearch(data);
+                res = (Boolean) ss[0];
+                time += (Integer) ss[1];
             } else {
-                return reverseSimpleSearch(data);
+
+                System.out.println("vanaf head");
+                Object[] ss = reverseSimpleSearch(data);
+                res = (Boolean) ss[0];
+                time += (Integer) ss[1];
             }
         }
+
+        return new Object[] { res, 123 };
     }
 
     public void simpleSort() {
