@@ -95,13 +95,13 @@ public class Doubly_Linked_List {
         }
 
         // maakt laatste value tail
-        Doubly_ListNode current_2 = head;
+        Doubly_ListNode current_2 = sorted.head;
 
         for (int i = 1; i < sorted.nodeCount; i++) {
             Doubly_ListNode pointer = current_2.next;
             current_2 = pointer;
         }
-        sorted.tail = current_2.next; // !!!
+        sorted.tail = current_2; // !!!
         sorted.tail.next = null;
 
         return sorted;
@@ -130,10 +130,6 @@ public class Doubly_Linked_List {
                     }
                 }
                 // insert de node
-                if (current.next != null) {
-                    current.next.prev = newNode;
-                    newNode.next = current.next.prev;
-                }
                 current.next = newNode;
                 newNode.prev = current;
             }

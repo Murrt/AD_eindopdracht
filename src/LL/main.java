@@ -6,19 +6,17 @@ public class main {
         Linked_List linkedlist = new Linked_List();
 
         linkedlist.add(1);
-        linkedlist.add(2);
+        linkedlist.add(12);
         linkedlist.add(3);
         linkedlist.add(4);
-        linkedlist.add(5);
-        linkedlist.add(6);
+        linkedlist.add(19);
+        linkedlist.add(7);
 
-        String print = linkedlist.print_nodes();
-        System.out.println(print);
+        Linked_List sorted = linkedlist.insertionSort();
+        sorted.print_nodes();
+        Linked_List sorted2 = sorted.insertionSort();
+        sorted2.print_nodes();
 
-        linkedlist.remove(3);
-        
-        String print2 = linkedlist.print_nodes();
-        System.out.println(print2);
     }
 
 }

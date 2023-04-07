@@ -14,8 +14,7 @@ public class Linked_List {
     }
 
     public void remove(Integer index) throws Exception {
-        index = index + 1;
-        if (index < 1 || index > nodeCount) {
+        if (index < 0 || index > nodeCount) {
             System.out.println(nodeCount);
             throw new Exception("ongeldige index");
         } else {
@@ -32,10 +31,10 @@ public class Linked_List {
                 if (current.next != null && current.next.next != null) {
                     current.next = current.next.next;
                 } else {
-                    head.next = null;
+                    tail = current;
+                    tail.next = null;
                 }
             }
-
         }
         nodeCount--;
     }
@@ -47,18 +46,21 @@ public class Linked_List {
         System.out.println("-----------------");
         System.out.println("Node count: " + nodeCount);
         System.out.println("Node head: " + head.data);
-        System.out.println("Node tail: " + tail.data);
+        // System.out.println("Node tail: " + tail.data);
 
         List<String> strings = new LinkedList<>();
         ListNode node = head;
         // loop door alle nodes
         for (int i = 1; i <= nodeCount; i++) {
             if (node.data != null) {
-                System.out.println(node.data);
+                if (node.next != null) {
+                    System.out.println("current: " + node.data + " next: " + node.next.data);
+                } else {
+                    System.out.println("current: " + node.data);
+                }
                 strings.add(Integer.toString(node.data));
             }
             node = node.next;
-
         }
 
         String message = String.join(",", strings);
@@ -97,19 +99,19 @@ public class Linked_List {
 
         while (current != null) {
             ListNode next = current.next;
-            // current.prev = current.next = null;
             sorted = sortedInsert(sorted, current);
             current = next;
         }
 
         // maakt laatste value tail
-        ListNode current_2 = head;
+        ListNode current_2 = sorted.head;
 
         for (int i = 1; i < sorted.nodeCount; i++) {
             ListNode pointer = current_2.next;
             current_2 = pointer;
         }
-        sorted.tail = current_2.next; // !!!
+
+        sorted.tail = current_2; // !!!
         sorted.tail.next = null;
 
         return sorted;
