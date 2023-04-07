@@ -59,7 +59,7 @@ public class Doubly_Linked_List {
         Doubly_ListNode node = head;
 
         // loop door alle nodes
-        for (int i = 1; i < nodeCount; i++) {
+        for (int i = 0; i < nodeCount; i++) {
             System.out.println(node.data);
             strings.add(Integer.toString(node.data));
             node = node.next;
