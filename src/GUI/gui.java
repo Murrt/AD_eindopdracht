@@ -61,7 +61,7 @@ public class gui implements ActionListener {
 
 	// BT Search Field & Button
 	private static JTextField btSearchField = new JTextField(25);
-	private static JLabel btSearchFieldLabel = new JLabel();
+	private static JLabel btSearchFieldLabel = new JLabel("Search Node:");
 
 	private static JButton btSearchButton = new JButton("Search");
 	private static JButton btSearchButton2 = new JButton("Search2");
@@ -173,7 +173,7 @@ public class gui implements ActionListener {
 		pane.add(btSearchButton2);
 
 		btSearchField.setBounds(825, 25, 100, 20);
-		btSearchFieldLabel.setBounds(700, 25, 200, 20);
+		btSearchFieldLabel.setBounds(725, 25, 200, 20);
 		btSearchButton.setBounds(825, 50, 100, 20);
 		btSearchButton2.setBounds(825, 75, 100, 20);
 
@@ -220,7 +220,6 @@ public class gui implements ActionListener {
 				// search
 				btSearchField.setVisible(true);
 				btSearchButton.setVisible(true);
-				
 				btSearchFieldLabel.setVisible(true);
 				// delete
 				btDeleteField.setVisible(true);
