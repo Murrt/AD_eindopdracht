@@ -200,7 +200,7 @@ public class gui implements ActionListener {
 		addValue.setBounds(25, 245, 120, 20);
 
 		// datastructure result
-		datastructure_result.setBounds(300, 200, 200, 50);
+		datastructure_result.setBounds(300, 200, 600, 50);
 		datastructure_time.setBounds(300, 300, 200, 50);
 
 		sortingTime_result.setBounds(350, 300, 400, 400);
@@ -424,19 +424,34 @@ public class gui implements ActionListener {
 					btSortButton.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							if (preOT.isSelected()) {
+								long startTime = System.currentTimeMillis();
 
 								binary_Tree.preOrderTraversal(binary_Tree.root);
-								datastructure_result.setText(binary_Tree.toStringPreorder(binary_Tree.root));
+
+								long endTime = System.currentTimeMillis();
+								long elapsedTime = endTime - startTime;
+
+								datastructure_result.setText(binary_Tree.toStringPreorder(binary_Tree.root) + " Time completion in: " + elapsedTime + " miliseconds.");
 
 							} else if (inOT.isSelected()) {
+								long startTime = System.currentTimeMillis();
 
 								binary_Tree.inOrderTraversal(binary_Tree.root);
-								datastructure_result.setText(binary_Tree.toStringInorder(binary_Tree.root));
+
+								long endTime = System.currentTimeMillis();
+								long elapsedTime = endTime - startTime;
+
+								datastructure_result.setText(binary_Tree.toStringInorder(binary_Tree.root) + " Time completion in: " + elapsedTime + " miliseconds.");
 
 							} else if (postOT.isSelected()) {
+								long startTime = System.currentTimeMillis();
 
 								binary_Tree.postOrderTraversal(binary_Tree.root);
-								datastructure_result.setText(binary_Tree.toStringPostOrder(binary_Tree.root));
+
+								long endTime = System.currentTimeMillis();
+								long elapsedTime = endTime - startTime;
+
+								datastructure_result.setText(binary_Tree.toStringPostOrder(binary_Tree.root) + " Time completion in: " + elapsedTime + " miliseconds.");
 
 							}
 						}
@@ -445,7 +460,8 @@ public class gui implements ActionListener {
 						public void actionPerformed(ActionEvent e) {
 							String value = btSearchField.getText();
 							int value_int = Integer.parseInt(value);
-
+							
+							binary_Tree.findNode(value_int);
 							datastructure_result.setText(binary_Tree.findNode(value_int));
 						}
 					});
@@ -455,7 +471,7 @@ public class gui implements ActionListener {
 							String value = btDeleteField.getText();
 							int value_int = Integer.parseInt(value);
 
-							binary_Tree.removeNode(value_int);
+							datastructure_result.setText(binary_Tree.removeNode(value_int));
 						}
 					});
 				}

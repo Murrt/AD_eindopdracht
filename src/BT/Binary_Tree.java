@@ -55,6 +55,8 @@ public class Binary_Tree {
         s += focusNode.toString();
         s += toStringPreorder(focusNode.leftChild);
         s += toStringPreorder(focusNode.rightChild);
+
+
         return s;
     }
 
@@ -67,6 +69,7 @@ public class Binary_Tree {
     }
 
     public String toStringInorder(Node focusNode) {
+
         String s = "";
         if (focusNode == null) {
             return "";
@@ -75,6 +78,7 @@ public class Binary_Tree {
         s += toStringInorder(focusNode.leftChild);
         s += focusNode.toString();
         s += toStringInorder(focusNode.rightChild);
+
         return s;
     }
 
@@ -87,14 +91,15 @@ public class Binary_Tree {
     }
 
     public String toStringPostOrder(Node focusNode) {
+
         String result = "";
         if (focusNode == null) {
             return "";
+        } else {
+            result += toStringPostOrder(focusNode.leftChild);
+            result += toStringPostOrder(focusNode.rightChild);
+            result += focusNode.toString(); 
         }
-
-        result += toStringPostOrder(focusNode.leftChild);
-        result += toStringPostOrder(focusNode.rightChild);
-        result += focusNode.toString();
         return result;
     }
 
@@ -111,17 +116,19 @@ public class Binary_Tree {
             }
             if (focusNode == null) {
                 System.out.println("Node niet gevonden.");
-                return null;
+                return "Node niet gevonden.";
             }
         }
         System.out.println("Node gevonden.");
         long endTime = System.currentTimeMillis();
         long elapsedTime = endTime - startTime;
         System.out.println(elapsedTime);
-        return focusNode.toString() + " Time completion: " + elapsedTime;
+        return focusNode.toString() + " Time completion in: " + elapsedTime + " miliseconds.";
     }
 
-    public boolean removeNode(int key) {
+    public String removeNode(int key) {
+        long startTime = System.currentTimeMillis();
+
         Node focusNode = root;
         Node parent = root;
 
@@ -139,7 +146,7 @@ public class Binary_Tree {
             // Focus Node kan niet gevonden worden.
             if (focusNode == null) {
                 System.out.println("FocusNode kon niet gevonden worden.");
-                return false;
+                return "FocusNode kon niet gevonden worden.";
             }
         }
         // Focus Node heeft geen children.
@@ -217,7 +224,10 @@ public class Binary_Tree {
         }
 
         System.out.println("Node verwijderd.");
-        return true;
+
+        long endTime = System.currentTimeMillis();
+        long elapsedTime = endTime - startTime;
+        return "Node verwijderd. Time completion in: " + elapsedTime + " miliseconds.";
     }
 
     public Node getReplacementNode(Node replacedNode) {
