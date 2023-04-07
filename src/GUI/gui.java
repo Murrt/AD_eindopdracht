@@ -48,10 +48,8 @@ public class gui implements ActionListener {
 	private static JLabel datastructure_result = new JLabel();
 	private static JLabel datastructure_time = new JLabel();
 
-
 	// Sorting time completion label
 	private static JLabel sortingTime_result = new JLabel();
-
 
 	// BT Tree Traversel Buttons
 	private static JRadioButton preOT = new JRadioButton("Pre Order Traversel");

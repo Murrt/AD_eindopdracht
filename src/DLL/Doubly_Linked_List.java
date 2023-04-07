@@ -140,12 +140,12 @@ public class Doubly_Linked_List {
     }
 
     public Object[] simpleSearch(Integer data) throws Exception {
-        Boolean ret = null;
+        Boolean ret = false;
         // check of lijst niet leeg is
         if (head != null) {
             // loop door lijst vanaf head op match met data
             Doubly_ListNode current = head;
-            for (int i = 1; i < nodeCount; i++) {
+            for (int i = 1; i <= nodeCount; i++) {
                 if (current.data == data) {
                     ret = true;
                 }
@@ -156,14 +156,12 @@ public class Doubly_Linked_List {
         } else {
             throw new Exception("Doubly linked list heeft geen head");
         }
-        ret = false;
 
-        // return ret;
         return new Object[] { ret, 123 };
     }
 
     public Object[] reverseSimpleSearch(Integer data) throws Exception {
-        Boolean ret = null;
+        Boolean ret = false;
         // check of lijst niet leeg is
         if (tail != null) {
             // loop door lijst vanaf head op match met data
@@ -179,7 +177,6 @@ public class Doubly_Linked_List {
         } else {
             throw new Exception("Doubly linked list heeft geen head");
         }
-        ret = false;
 
         // return ret;
         return new Object[] { ret, 123 };
