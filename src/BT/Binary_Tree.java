@@ -1,9 +1,5 @@
 package BT;
 
-import java.util.Arrays;
-
-import javax.swing.tree.TreeNode;
-
 public class Binary_Tree {
 
     public Node root;
