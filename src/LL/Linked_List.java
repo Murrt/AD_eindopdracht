@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Linked_List {
 
-    public ListNode head;
-    public ListNode tail;
+    public ListNode<Student> head;
+    public ListNode<Student> tail;
     public int nodeCount = 0;
 
     public static void main(String[] args) {
@@ -25,7 +25,7 @@ public class Linked_List {
                 head = head.next;
             } else {
                 // loop to the node before the one we want to remove
-                ListNode current = head;
+                ListNode<Student> current = head;
                 for (int i = 0; i < index - 1; i++) {
                     current = current.next;
                 }
@@ -55,7 +55,7 @@ public class Linked_List {
         // System.out.println("Node tail: " + tail.data);
 
         List<String> strings = new LinkedList<>();
-        ListNode node = head;
+        ListNode<Student> node = head;
         // loop door alle nodes
         for (int i = 1; i <= nodeCount; i++) {
             if (node.data != null) {
@@ -64,7 +64,7 @@ public class Linked_List {
                 } else {
                     System.out.println("current: " + node.data);
                 }
-                strings.add(Integer.toString(node.data));
+                strings.add(Integer.toString(node.data.getStudentNumber()));
             }
             node = node.next;
         }
@@ -75,9 +75,8 @@ public class Linked_List {
         return message;
     }
 
-    public void add(Integer data) {
-
-        ListNode node = new ListNode();
+    public void add(Student data) {
+        ListNode<Student> node = new ListNode<>();
         node.data = data;
 
         if (tail == null) {
@@ -101,20 +100,20 @@ public class Linked_List {
     public Object[] insertionSort() {
 
         Linked_List sorted = new Linked_List();
-        ListNode current = head;
+        ListNode<Student> current = head;
         long startTime = System.nanoTime();
 
         while (current != null) {
-            ListNode next = current.next;
+            ListNode<Student> next = current.next;
             sorted = sortedInsert(sorted, current);
             current = next;
         }
 
         // maakt laatste value tail
-        ListNode current_2 = sorted.head;
+        ListNode<Student> current_2 = sorted.head;
 
         for (int i = 1; i < sorted.nodeCount; i++) {
-            ListNode pointer = current_2.next;
+            ListNode<Student> pointer = current_2.next;
             current_2 = pointer;
         }
 
@@ -127,23 +126,20 @@ public class Linked_List {
         return new Object[] { sorted, time };
     }
 
-    static Linked_List sortedInsert(Linked_List sorted, ListNode newNode) {
+    static Linked_List sortedInsert(Linked_List sorted, ListNode<Student> newNode) {
         // check of eerste insert is
         if (sorted.head == null) {
             sorted.head = newNode;
         } else {
             // check of we gewoon head kunnen opschuiven
-            if ((sorted.head).data >= newNode.data) {
+            if (sorted.head.data.compareTo(newNode.data) >= 0) {
                 newNode.next = sorted.head;
                 sorted.head = newNode;
             } else {
                 // loop door de rest waar de node hoort
-                ListNode current = sorted.head;
-                for (int i = 1; i < sorted.nodeCount; i++) {
-                    if (current.next.data < newNode.data) {
-                        current = current.next;
-                        newNode.next = current.next;
-                    }
+                ListNode<Student> current = sorted.head;
+                while (current.next != null && current.next.data.compareTo(newNode.data) < 0) {
+                    current = current.next;
                 }
                 // insert de node
                 if (current.next != null) {
@@ -163,11 +159,11 @@ public class Linked_List {
         // check of lijst niet leeg is
         if (head != null) {
             // loop door lijst vanaf head op match met data
-            ListNode current = head;
+            ListNode<Student> current = head;
             System.out.println("Gezocht: " + data);
 
             for (int i = 0; i < nodeCount; i++) {
-                if (current.data == data) {
+                if (current.data.getStudentNumber() == data) {
                     System.out.println("Gevonden: " + current.data);
                     ret = true;
                 }
@@ -192,8 +188,8 @@ public class Linked_List {
 
         if (nodeCount > 0) {
             // werkt alleen op gesorteerde lijst!
-            Integer headDistance = Math.abs(head.data - data);
-            Integer tailDistance = Math.abs(tail.data - data);
+            Integer headDistance = Math.abs(head.data.getStudentNumber() - data);
+            Integer tailDistance = Math.abs(tail.data.getStudentNumber() - data);
 
             // check of data in head of tail zit
             if (headDistance == 0 || tailDistance == 0) {
@@ -214,7 +210,7 @@ public class Linked_List {
     }
 
     public long simpleSort() {
-        ListNode current = null, index = null;
+        ListNode<Student> current = null, index = null;
         long startTime = System.nanoTime();
 
         int data;
@@ -223,10 +219,10 @@ public class Linked_List {
         } else {
             for (current = head; current.next != null; current = current.next) {
                 for (index = current.next; index != null; index = index.next) {
-                    if (current.data > index.data) {
-                        data = current.data;
-                        current.data = index.data;
-                        index.data = data;
+                    if (current.data.getStudentNumber() > index.data.getStudentNumber()) {
+                        data = current.data.getStudentNumber();
+                        current.data.setStudentNumber(index.data.getStudentNumber());
+                        index.data.setStudentNumber(data);
                     }
                 }
             }
