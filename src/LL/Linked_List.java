@@ -16,7 +16,7 @@ public class Linked_List {
     public long remove(Integer index) throws Exception {
         long startTime = System.nanoTime();
 
-        if (index < 0 || index > nodeCount) {
+        if (index < 0 || index >= nodeCount) {
             System.out.println(nodeCount);
             throw new Exception("ongeldige index");
         } else {
@@ -56,7 +56,7 @@ public class Linked_List {
 
         List<String> strings = new LinkedList<>();
         ListNode<Student> node = head;
-        // loop door alle nodes
+        // loop through all nodes
         for (int i = 1; i <= nodeCount; i++) {
             if (node.data != null) {
                 if (node.next != null) {
@@ -83,15 +83,15 @@ public class Linked_List {
             tail = node;
         }
 
-        // Make next of new node as head and previous as null /
-        node.next = head;
+        // Make next of new node as head and previous as null
+        node.next = null;
 
-        // change prev of head node to new node /
+        // change prev of head node to new node
         if (head != null) {
             node.next = head;
         }
 
-        // move the head to point to the new node /
+        // move the head to point to the new node
         head = node;
 
         nodeCount++;
@@ -109,10 +109,10 @@ public class Linked_List {
             current = next;
         }
 
-        // maakt laatste value tail
+        // make last value tail
         ListNode<Student> current_2 = sorted.head;
 
-        for (int i = 1; i < sorted.nodeCount; i++) {
+        for (int i = 1; i <= sorted.nodeCount; i++) {
             ListNode<Student> pointer = current_2.next;
             current_2 = pointer;
         }
@@ -127,25 +127,23 @@ public class Linked_List {
     }
 
     static Linked_List sortedInsert(Linked_List sorted, ListNode<Student> newNode) {
-        // check of eerste insert is
+        // check if first insert
         if (sorted.head == null) {
             sorted.head = newNode;
         } else {
-            // check of we gewoon head kunnen opschuiven
+            // check if we can simply move the head
             if (sorted.head.data.compareTo(newNode.data) >= 0) {
                 newNode.next = sorted.head;
                 sorted.head = newNode;
             } else {
-                // loop door de rest waar de node hoort
+                // loop through the rest to find the correct position for the node
                 ListNode<Student> current = sorted.head;
                 while (current.next != null && current.next.data.compareTo(newNode.data) < 0) {
                     current = current.next;
                 }
-                // insert de node
-                if (current.next != null) {
-                    newNode.next = current.next;
-                    current.next = newNode;
-                }
+                // insert the node
+                newNode.next = current.next;
+                current.next = newNode;
             }
         }
         sorted.nodeCount++;
@@ -156,14 +154,14 @@ public class Linked_List {
         Boolean ret = false;
         long startTime = System.nanoTime();
 
-        // check of lijst niet leeg is
+        // check if the list is not empty
         if (head != null) {
-            // loop door lijst vanaf head op match met data
+            // loop through the list from head to find a match with the data
             ListNode<Student> current = head;
             System.out.println("Gezocht: " + data);
 
             for (int i = 0; i < nodeCount; i++) {
-                if (current.data.getStudentNumber() == data) {
+                if (current.data.getStudentNumber().equals(data)) {
                     System.out.println("Gevonden: " + current.data);
                     ret = true;
                 }
@@ -187,13 +185,13 @@ public class Linked_List {
         long startTime = System.nanoTime();
 
         if (nodeCount > 0) {
-            // werkt alleen op gesorteerde lijst!
-            Integer headDistance = Math.abs(head.data.getStudentNumber() - data);
-            Integer tailDistance = Math.abs(tail.data.getStudentNumber() - data);
+            // works only on a sorted list!
+            Integer headDistance = Math.abs(head.data.compareTo(data));
+            Integer tailDistance = Math.abs(tail.data.compareTo(data));
 
-            // check of data in head of tail zit
+            // check if data is in head or tail
             if (headDistance == 0 || tailDistance == 0) {
-                ret = true;// check of
+                ret = true;
             } else {
                 Object[] ss = simpleSearch(data);
                 ret = (Boolean) ss[0];
