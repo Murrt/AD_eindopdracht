@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 
 import BT.Binary_Tree;
 import LL.Linked_List;
+import LL.Student;
 import DLL.Doubly_Linked_List;
 
 public class gui implements ActionListener {
@@ -496,9 +497,10 @@ public class gui implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				String value = addValueTextField.getText();
 				int value_int = Integer.parseInt(value);
+				Student student = new Student(value_int);
 
 				// add to all datastructures
-				linkedlist.add(value_int);
+				linkedlist.add(student);
 				dlinkedlist.add(value_int);
 				binary_Tree.addNode(value_int);
 
