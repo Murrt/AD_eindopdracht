@@ -1,12 +1,12 @@
 package BT;
 
-public class Binary_Tree {
+public class Binary_Search_Tree<T extends Comparable<T>> {
 
-    public Node root;
+    public Node<T> root;
 
-    public void addNode(int key) {
+    public void addNode(T value) {
 
-        Node newNode = new Node(key);
+        Node newNode = new Node(value);
 
         // Check of key de root is
         if (root == null) {
@@ -21,7 +21,7 @@ public class Binary_Tree {
             while (true) {
                 parent = focusNode;
 
-                if (key < focusNode.key) {
+                if (value < focusNode.value) {
                     focusNode = focusNode.leftChild;
 
                     if (focusNode == null) {
@@ -106,12 +106,12 @@ public class Binary_Tree {
         return result;
     }
 
-    public String findNode(int key) {
+    public String findNode(T value) {
 
         Node focusNode = root;
 
-        while (focusNode.key != key) {
-            if (key < focusNode.key) {
+        while (focusNode.value != value) {
+            if (value < focusNode.value) {
                 focusNode = focusNode.leftChild;
             } else {
                 focusNode = focusNode.rightChild;
@@ -125,15 +125,15 @@ public class Binary_Tree {
         return focusNode.toString() + " gevonden.";
     }
 
-    public String removeNode(int key) {
+    public String removeNode(T value) {
         Node focusNode = root;
         Node parent = root;
 
         boolean isLeftChild = true;
 
-        while (focusNode.key != key) {
+        while (focusNode.value != value) {
             parent = focusNode;
-            if (key < focusNode.key) {
+            if (value < focusNode.value) {
                 isLeftChild = true;
                 focusNode = focusNode.leftChild;
             } else {
