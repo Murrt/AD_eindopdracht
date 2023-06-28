@@ -1,5 +1,5 @@
 
-import BT.Binary_Search_Tree;
+import BST.Binary_Search_Tree;
 import DLL.Doubly_Linked_List;
 
 public class main {
