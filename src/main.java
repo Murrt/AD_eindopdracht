@@ -27,10 +27,22 @@ public class main {
 
 		// d_linkedlist.fastSearch(3);
 
-		Binary_Search_Tree bst = new Binary_Search_Tree();
-		
-		bst.addNode("hello");
+Binary_Search_Tree<Integer> bst = new Binary_Search_Tree<>();
 
+        // Add nodes
+        bst.addNode(50);
+        bst.addNode(30);
+        bst.addNode(70);
+        bst.addNode(20);
+        bst.addNode(40);
+        bst.addNode(60);
+        bst.addNode(80);
+
+		System.out.println(bst.root);
+
+		//bst.preOrderTraversal(bst.root);
+		//bst.inOrderTraversal(bst.root);
+		bst.postOrderTraversal(bst.root);
 	}
 
 	public static void linkedlist(String[] args) throws Exception {
