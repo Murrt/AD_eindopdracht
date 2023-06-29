@@ -1,8 +1,8 @@
 package DLL;
 
 public class Doubly_ListNode extends LL.ListNode<Integer> {
-
-    public Doubly_ListNode prev, next, tail, head;
+    public Doubly_ListNode prev;
+    public Doubly_ListNode next;
 
     public Doubly_ListNode() {
         super();

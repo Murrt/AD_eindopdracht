@@ -477,14 +477,11 @@ public class gui implements ActionListener {
 
 							long startTime = System.currentTimeMillis();
 
-							String value = btDeleteField.getText();
-							int value_int = Integer.parseInt(value);
+
+
 							
-							long endTime = System.currentTimeMillis();
-							long elapsedTime = endTime - startTime;
 
 
-							datastructure_result.setText(binary_Tree.removeNode(value_int));
 							datastructure_time.setText(" Time completion in: " + elapsedTime + " miliseconds.");
 
 						}

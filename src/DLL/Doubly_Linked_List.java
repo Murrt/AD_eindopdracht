@@ -7,7 +7,13 @@ public class Doubly_Linked_List {
 
     public Doubly_ListNode head;
     public Doubly_ListNode tail;
-    public int nodeCount = 0;
+    public int nodeCount;
+
+    public Doubly_Linked_List() {
+        this.head = null;
+        this.tail = null;
+        this.nodeCount = 0;
+    }
 
     public static void main(String[] args) {
 
@@ -91,36 +97,36 @@ public class Doubly_Linked_List {
             current = next;
         }
 
-        Doubly_ListNode current_2 = sorted.head;
-        for (int i = 1; i < sorted.nodeCount; i++) {
-            Doubly_ListNode pointer = current_2.next;
-            current_2 = pointer;
-        }
-        sorted.tail = current_2;
-        sorted.tail.next = null;
         long endTime = System.nanoTime();
         long time = (endTime - startTime) / 1000000;
 
         return new Object[] { sorted, time };
     }
 
-    static Doubly_Linked_List sortedInsert(Doubly_Linked_List sorted, Doubly_ListNode newNode) {
+    private Doubly_Linked_List sortedInsert(Doubly_Linked_List sorted, Doubly_ListNode newNode) {
         if (sorted.head == null) {
             sorted.head = newNode;
+            sorted.tail = newNode;
+            newNode.prev = null;
+            newNode.next = null;
         } else {
             if (sorted.head.data.compareTo(newNode.data) >= 0) {
                 newNode.next = sorted.head;
                 newNode.next.prev = newNode;
+                newNode.prev = null;
                 sorted.head = newNode;
+            } else if (sorted.tail.data.compareTo(newNode.data) <= 0) {
+                newNode.prev = sorted.tail;
+                newNode.prev.next = newNode;
+                newNode.next = null;
+                sorted.tail = newNode;
             } else {
                 Doubly_ListNode current = sorted.head;
                 while (current.next != null && current.next.data.compareTo(newNode.data) < 0) {
                     current = current.next;
                 }
                 newNode.next = current.next;
-                if (current.next != null) {
-                    current.next.prev = newNode;
-                }
+                newNode.next.prev = newNode;
                 current.next = newNode;
                 newNode.prev = current;
             }
@@ -129,7 +135,7 @@ public class Doubly_Linked_List {
         sorted.nodeCount++;
         return sorted;
     }
-
+    
     public Object[] simpleSearch(Integer data) throws Exception {
         boolean ret = false;
         long startTime = System.nanoTime();

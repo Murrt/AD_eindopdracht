@@ -8,11 +8,11 @@ public class Student implements Comparable<Student> {
         this.studentNumber = studentNumber;
     }
 
-    public int getStudentNumber() {
+    public int getValue() {
         return studentNumber;
     }
 
-    public void setStudentNumber(int studentNumber) {
+    public void setValue(int studentNumber) {
         this.studentNumber = studentNumber;
     }
 

@@ -64,7 +64,7 @@ public class Linked_List {
                 } else {
                     System.out.println("current: " + node.data);
                 }
-                strings.add(Integer.toString(node.data.getStudentNumber()));
+                strings.add(Integer.toString(node.data.getValue()));
             }
             node = node.next;
         }
@@ -98,7 +98,6 @@ public class Linked_List {
     }
 
     public Object[] insertionSort() {
-
         Linked_List sorted = new Linked_List();
         ListNode<Student> current = head;
         long startTime = System.nanoTime();
@@ -109,43 +108,30 @@ public class Linked_List {
             current = next;
         }
 
-        // make last value tail
-        ListNode<Student> current_2 = sorted.head;
-
-        for (int i = 1; i <= sorted.nodeCount; i++) {
-            ListNode<Student> pointer = current_2.next;
-            current_2 = pointer;
-        }
-
-        sorted.tail = current_2; // !!!
-        sorted.tail.next = null;
-
         long endTime = System.nanoTime();
         long time = (endTime - startTime) / 1000000;
 
         return new Object[] { sorted, time };
     }
 
-    static Linked_List sortedInsert(Linked_List sorted, ListNode<Student> newNode) {
-        // check if first insert
+    private Linked_List sortedInsert(Linked_List sorted, ListNode<Student> newNode) {
         if (sorted.head == null) {
             sorted.head = newNode;
+            newNode.next = null;
         } else {
-            // check if we can simply move the head
             if (sorted.head.data.compareTo(newNode.data) >= 0) {
                 newNode.next = sorted.head;
                 sorted.head = newNode;
             } else {
-                // loop through the rest to find the correct position for the node
                 ListNode<Student> current = sorted.head;
                 while (current.next != null && current.next.data.compareTo(newNode.data) < 0) {
                     current = current.next;
                 }
-                // insert the node
                 newNode.next = current.next;
                 current.next = newNode;
             }
         }
+
         sorted.nodeCount++;
         return sorted;
     }
@@ -161,7 +147,7 @@ public class Linked_List {
             System.out.println("Gezocht: " + data);
 
             for (int i = 0; i < nodeCount; i++) {
-                if (current.data.getStudentNumber().equals(data)) {
+                if (current.data.getValue() == data) {
                     System.out.println("Gevonden: " + current.data);
                     ret = true;
                 }
@@ -179,21 +165,21 @@ public class Linked_List {
         return new Object[] { ret, time };
     }
 
-    public Object[] fastSearch(Integer data) throws Exception {
+    public Object[] fastSearch(int value_int) throws Exception {
 
         Boolean ret = false;
         long startTime = System.nanoTime();
 
         if (nodeCount > 0) {
             // works only on a sorted list!
-            Integer headDistance = Math.abs(head.data.compareTo(data));
-            Integer tailDistance = Math.abs(tail.data.compareTo(data));
+            Integer headDistance = Math.abs(head.data.getValue() - value_int);
+            Integer tailDistance = Math.abs(tail.data.getValue() - value_int);
 
             // check if data is in head or tail
             if (headDistance == 0 || tailDistance == 0) {
                 ret = true;
             } else {
-                Object[] ss = simpleSearch(data);
+                Object[] ss = simpleSearch(value_int);
                 ret = (Boolean) ss[0];
                 startTime += (long) ss[1];
             }
@@ -217,10 +203,10 @@ public class Linked_List {
         } else {
             for (current = head; current.next != null; current = current.next) {
                 for (index = current.next; index != null; index = index.next) {
-                    if (current.data.getStudentNumber() > index.data.getStudentNumber()) {
-                        data = current.data.getStudentNumber();
-                        current.data.setStudentNumber(index.data.getStudentNumber());
-                        index.data.setStudentNumber(data);
+                    if (current.data.getValue() > index.data.getValue()) {
+                        data = current.data.getValue();
+                        current.data.setValue(index.data.getValue());
+                        index.data.setValue(data);
                     }
                 }
             }
@@ -230,5 +216,10 @@ public class Linked_List {
         long time = (endTime - startTime) / 1000000;
 
         return time;
+    }
+
+    public static class ListNode<T> {
+        public T data;
+        public ListNode<T> next;
     }
 }
