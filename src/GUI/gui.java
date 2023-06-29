@@ -25,7 +25,7 @@ public class gui implements ActionListener {
 
 	private static Doubly_Linked_List dlinkedlist = new Doubly_Linked_List();
 	static Linked_List linkedlist = new Linked_List();
-	private static Binary_Search_Tree binary_Tree = new Binary_Search_Tree();
+	private static Binary_Search_Tree<Integer> binary_Tree = new Binary_Search_Tree<>();
 
 	private static JButton selectDatastructuurButton = new JButton("Selecteer Datastructuur");
 	private static ButtonGroup datastructureGroup = new ButtonGroup();
